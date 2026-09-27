@@ -167,6 +167,19 @@
   #lg_d{width:165px;}
   #lg_a{width:150px;}
   #lg_n{flex:1 1 180px; min-width:0;}
+  .form select{
+    padding:11px 10px; min-height:44px; border:1px solid var(--line);
+    border-radius:11px; font-size:.92rem; font-family:inherit; background:#fff;
+    color:var(--text); font-weight:600; max-width:215px;
+  }
+  .form select:focus{outline:none; border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(29,78,216,.14);}
+  .form select.err{border-color:var(--red); box-shadow:0 0 0 3px rgba(185,28,28,.13);}
+  .lg-err{flex:1 1 100%; margin-top:-4px; color:var(--red);
+    font-size:.8rem; font-weight:700;}
+  .lg-err[hidden]{display:none;}
+  .seg-btn.on.t-tr{color:var(--blue);}
+  .li-amt.t-tr{color:var(--navy);}
   .btn{
     display:inline-flex; align-items:center; justify-content:center; gap:8px;
     min-height:44px; padding:11px 18px; border-radius:11px; border:1px solid transparent;
@@ -222,6 +235,13 @@
   }
   .ed-f input[type=date]{flex:1 1 100%;}
   .ed-f input:focus{outline:0; border-color:var(--navy2);}
+  .ed-f select{
+    flex:1 1 130px; min-width:0; padding:7px 8px; font:inherit; font-size:.83rem;
+    border:1px solid var(--line); border-radius:9px; background:#fff;
+    color:var(--text); font-weight:600;
+  }
+  .ed-f select:focus{outline:0; border-color:var(--navy2);}
+  .ed-f select.err{border-color:var(--red);}
   .ed-t{display:flex; gap:6px;}
   .ed-b{
     border:1px solid var(--line); background:#fff; color:var(--muted);
@@ -287,6 +307,15 @@
     border:1px solid var(--navy); border-radius:8px; padding:4px 6px;
     font-variant-numeric:tabular-nums; color:var(--navy); background:#fff;
   }
+  .b0{cursor:pointer;}
+  .b0:hover .bv{color:var(--navy);}
+  .rs{
+    display:block; width:100%; margin-top:5px; font:inherit; font-size:.67rem;
+    font-weight:700; cursor:pointer; border:1px dashed var(--line);
+    background:transparent; color:var(--muted); border-radius:8px; padding:2px 6px;
+  }
+  .rs:hover, .rs:focus-visible{border-color:var(--amber); color:var(--amber);}
+  .rs[hidden]{display:none;}
   .pick{display:grid; gap:9px; margin-top:14px;}
   .pk{
     display:flex; align-items:center; gap:10px; flex-wrap:wrap;
@@ -492,18 +521,18 @@
           <th class="num">حركة الفترة</th><th class="num">في الإجمالي</th>
         </tr></thead>
         <tbody><tr class="grp" data-gid="cash" data-gon="1"><td><b><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>Cash</b></td><td class="num"></td><td class="num"><b class="g-eq">0.00</b></td><td class="num"></td><td class="num"><button type="button" class="tg on" data-tg="g:cash" aria-pressed="true">نعم</button></td></tr>
-<tr class="acc" data-aid="nbd" data-gid="cash" data-name="NBD Bank" data-cur="EGP" data-rate="1" data-bal="1057.98" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>NBD Bank<span class="tag t-sms">SMS</span></span></td><td class="num b0"><span class="bv">1,057.98</span><button type="button" class="ed" data-ed="nbd">تعديل</button></td><td class="num eq">1,057.98</td><td class="num"><span class="v-green">+0</span> / <span class="v-red">-60</span></td><td class="num"><button type="button" class="tg on" data-tg="a:nbd" aria-pressed="true">نعم</button></td></tr>
-<tr class="acc" data-aid="cib" data-gid="cash" data-name="CIB Bank" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>CIB Bank<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="cib">تعديل</button></td><td class="num eq">1,000.00</td><td class="num"><span class="v-green">+200</span> / <span class="v-red">-260</span></td><td class="num"><button type="button" class="tg on" data-tg="a:cib" aria-pressed="true">نعم</button></td></tr>
-<tr class="acc" data-aid="mashreq" data-gid="cash" data-name="Mashreq Bank" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>Mashreq Bank<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="mashreq">تعديل</button></td><td class="num eq">1,000.00</td><td class="num"><span class="v-green">+1,000</span> / <span class="v-red">-0</span></td><td class="num"><button type="button" class="tg on" data-tg="a:mashreq" aria-pressed="true">نعم</button></td></tr>
-<tr class="acc" data-aid="ma7fazty" data-gid="cash" data-name="محفظتي" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg>محفظتي<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="ma7fazty">تعديل</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:ma7fazty" aria-pressed="true">نعم</button></td></tr>
-<tr class="acc" data-aid="bybit" data-gid="cash" data-name="Bybit" data-cur="USD" data-rate="52" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg>Bybit<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="bybit">تعديل</button></td><td class="num eq">52,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:bybit" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="nbd" data-gid="cash" data-name="NBD Bank" data-cur="EGP" data-rate="1" data-bal="1057.98" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>NBD Bank<span class="tag t-sms">SMS</span></span></td><td class="num b0" data-ed="nbd" title="اضغط لكتابة الرصيد"><span class="bv">1,057.98</span><button type="button" class="ed" data-ed="nbd">تعديل</button><button type="button" class="rs" data-rs="nbd" hidden>إرجاع</button></td><td class="num eq">1,057.98</td><td class="num"><span class="v-green">+0</span> / <span class="v-red">-60</span></td><td class="num"><button type="button" class="tg on" data-tg="a:nbd" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="cib" data-gid="cash" data-name="CIB Bank" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>CIB Bank<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="cib" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="cib">تعديل</button><button type="button" class="rs" data-rs="cib" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="v-green">+200</span> / <span class="v-red">-260</span></td><td class="num"><button type="button" class="tg on" data-tg="a:cib" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="mashreq" data-gid="cash" data-name="Mashreq Bank" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>Mashreq Bank<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="mashreq" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="mashreq">تعديل</button><button type="button" class="rs" data-rs="mashreq" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="v-green">+1,000</span> / <span class="v-red">-0</span></td><td class="num"><button type="button" class="tg on" data-tg="a:mashreq" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="ma7fazty" data-gid="cash" data-name="محفظتي" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg>محفظتي<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="ma7fazty" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="ma7fazty">تعديل</button><button type="button" class="rs" data-rs="ma7fazty" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:ma7fazty" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="bybit" data-gid="cash" data-name="Bybit" data-cur="USD" data-rate="52" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg>Bybit<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="bybit" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="bybit">تعديل</button><button type="button" class="rs" data-rs="bybit" hidden>إرجاع</button></td><td class="num eq">52,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:bybit" aria-pressed="true">نعم</button></td></tr>
 <tr class="grp" data-gid="investment" data-gon="1"><td><b><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg>Investment</b></td><td class="num"></td><td class="num"><b class="g-eq">0.00</b></td><td class="num"></td><td class="num"><button type="button" class="tg on" data-tg="g:investment" aria-pressed="true">نعم</button></td></tr>
-<tr class="acc" data-aid="gold" data-gid="investment" data-name="Gold" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg>Gold<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="gold">تعديل</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:gold" aria-pressed="true">نعم</button></td></tr>
-<tr class="acc" data-aid="thndr" data-gid="investment" data-name="Thndr" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-layout-dashboard"/></svg>Thndr<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="thndr">تعديل</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:thndr" aria-pressed="true">نعم</button></td></tr>
-<tr class="acc" data-aid="halan" data-gid="investment" data-name="Halan" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg>Halan<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="halan">تعديل</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:halan" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="gold" data-gid="investment" data-name="Gold" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg>Gold<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="gold" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="gold">تعديل</button><button type="button" class="rs" data-rs="gold" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:gold" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="thndr" data-gid="investment" data-name="Thndr" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-layout-dashboard"/></svg>Thndr<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="thndr" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="thndr">تعديل</button><button type="button" class="rs" data-rs="thndr" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:thndr" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="halan" data-gid="investment" data-name="Halan" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg>Halan<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="halan" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="halan">تعديل</button><button type="button" class="rs" data-rs="halan" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:halan" aria-pressed="true">نعم</button></td></tr>
 <tr class="grp" data-gid="others" data-gon="1"><td><b><svg class="ic" aria-hidden="true"><use href="#ic-send"/></svg>Others</b></td><td class="num"></td><td class="num"><b class="g-eq">0.00</b></td><td class="num"></td><td class="num"><button type="button" class="tg on" data-tg="g:others" aria-pressed="true">نعم</button></td></tr>
-<tr class="acc" data-aid="amera" data-gid="others" data-name="Amera's Lend" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-send"/></svg>Amera's Lend<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="amera">تعديل</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:amera" aria-pressed="true">نعم</button></td></tr>
-<tr class="acc" data-aid="lend" data-gid="others" data-name="Lend" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-send"/></svg>Lend<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="lend">تعديل</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:lend" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="amera" data-gid="others" data-name="Amera's Lend" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-send"/></svg>Amera's Lend<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="amera" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="amera">تعديل</button><button type="button" class="rs" data-rs="amera" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:amera" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="lend" data-gid="others" data-name="Lend" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-send"/></svg>Lend<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="lend" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="lend">تعديل</button><button type="button" class="rs" data-rs="lend" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:lend" aria-pressed="true">نعم</button></td></tr>
 <tr class="tot"><td>الأصول (Assets)</td><td class="num"></td><td class="num" id="nw_a2">61,057.98</td><td class="num"></td><td class="num"></td></tr>
 <tr class="tot"><td>الديون (Liabilities)</td><td class="num"></td><td class="num" id="nw_l2">0.00</td><td class="num"></td><td class="num"></td></tr>
 <tr class="tot big"><td>الإجمالي (Total)</td><td class="num"></td><td class="num" id="nw_t2">61,057.98</td><td class="num"></td><td class="num"></td></tr></tbody>
@@ -511,49 +540,44 @@
     </div>
 
     <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> أي حساب برصيد سالب بيتحسب تلقائياً ضمن
-    <b>الديون</b>، فالإجمالي = الأصول ناقص الديون. اضغط «تعديل» لكتابة رصيدك
-    الحالي، ومفتاح «في الإجمالي» بيستبعد الحساب من الأصول والديون مع بعض.
-    التعديلات محفوظة في هذا الجهاز.</div>
+    <b>الديون</b>، فالإجمالي = الأصول ناقص الديون. اضغط على أي رصيد أو على
+    «تعديل» لكتابته بيدك، وبعدها بيظهر «إرجاع» يرجّعه لقيمة الملف. ومفتاح
+    «في الإجمالي» بيستبعد الحساب من الأصول والديون مع بعض.</div>
+
+    <div class="actions">
+      <button class="btn btn-pri" onclick="exportCfg()"><svg class="ic" aria-hidden="true"><use href="#ic-download"/></svg> نسخ accounts.json</button>
+      <button class="btn btn-danger" onclick="clearLocal()"><svg class="ic" aria-hidden="true"><use href="#ic-x"/></svg> مسح التعديلات المحفوظة</button>
+    </div>
+
+    <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> الأرصدة والتعديلات محفوظة في متصفح الجهاز ده بس.
+    «نسخ accounts.json» بيديك نسخة كاملة بالأرقام الحالية (وبيرجّع كل حساب
+    عدّلته بيه لـ source: manual عشان الـ SMS ما يرجّعوش) — الصقها مكان
+    <b>03_System/accounts.json</b> واضغط rebuild عشان تثبت على الموقع.</div>
 
     <div class="pick-h"><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg>رسائل من غير اسم بنك — اختار لها الحساب</div><div class="pick"><div class="pk" data-pk="0" data-bal="2448.07"><span class="pk-t">مصروف 5.00 EGP</span><span class="pk-r">Uber Downtown EG</span><span class="pk-m">رصيد مبلّغ 2,448.07</span><span class="pk-n"></span><select aria-label="اختار الحساب"><option value="">اختار الحساب</option><option value="nbd">NBD Bank</option><option value="cib">CIB Bank</option><option value="mashreq">Mashreq Bank</option><option value="ma7fazty">محفظتي</option><option value="bybit">Bybit</option><option value="gold">Gold</option><option value="thndr">Thndr</option><option value="halan">Halan</option><option value="amera">Amera's Lend</option><option value="lend">Lend</option></select></div><div class="pk" data-pk="1" data-bal="1572.28"><span class="pk-t">مصروف 255.00 EGP</span><span class="pk-r">CHILLOUT TRUIMPH CAIRO EG</span><span class="pk-m">رصيد مبلّغ 1,572.28</span><span class="pk-n"></span><select aria-label="اختار الحساب"><option value="">اختار الحساب</option><option value="nbd">NBD Bank</option><option value="cib">CIB Bank</option><option value="mashreq">Mashreq Bank</option><option value="ma7fazty">محفظتي</option><option value="bybit">Bybit</option><option value="gold">Gold</option><option value="thndr">Thndr</option><option value="halan">Halan</option><option value="amera">Amera's Lend</option><option value="lend">Lend</option></select></div></div>
+    <script type="application/json" id="acc_cfg">{"version": 1, "comment": "بنية الحسابات: مجموعات -> حسابات. in_total يتحكم هل يدخل الحساب/المجموعة في الـ Total. source: sms = الرصيد بييجي من رسائل البنك، manual = تكتبه بنفسك.", "fx": {"usd_egp": 52.0}, "default_sms_account": "cib", "groups": [{"id": "cash", "name": "Cash", "in_total": true, "accounts": [{"id": "nbd", "name": "NBD Bank", "currency": "EGP", "kind": "bank", "source": "sms", "in_total": true, "balance": 1000}, {"id": "cib", "name": "CIB Bank", "currency": "EGP", "kind": "bank", "source": "sms", "in_total": true, "balance": 1000}, {"id": "mashreq", "name": "Mashreq Bank", "currency": "EGP", "kind": "bank", "source": "sms", "in_total": true, "balance": 1000}, {"id": "ma7fazty", "name": "محفظتي", "currency": "EGP", "kind": "wallet", "source": "manual", "in_total": true, "balance": 1000}, {"id": "bybit", "name": "Bybit", "currency": "USD", "kind": "exchange", "source": "manual", "in_total": true, "balance": 1000}]}, {"id": "investment", "name": "Investment", "in_total": true, "accounts": [{"id": "gold", "name": "Gold", "currency": "EGP", "kind": "asset", "source": "manual", "in_total": true, "balance": 1000}, {"id": "thndr", "name": "Thndr", "currency": "EGP", "kind": "broker", "source": "manual", "in_total": true, "balance": 1000}, {"id": "halan", "name": "Halan", "currency": "EGP", "kind": "wallet", "source": "manual", "in_total": true, "balance": 1000}]}, {"id": "others", "name": "Others", "in_total": true, "accounts": [{"id": "amera", "name": "Amera's Lend", "currency": "EGP", "kind": "receivable", "source": "manual", "in_total": true, "balance": 1000}, {"id": "lend", "name": "Lend", "currency": "EGP", "kind": "receivable", "source": "manual", "in_total": true, "balance": 1000}]}]}</script>
   </section>
-
-  <section id="market"><div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg><h2>نبض السوق — Cairo</h2><span class="hint">آخر فحص: 27/09/2026 — تحديث أسبوعي</span></div><div class="mk"><div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-fuel"/></svg>بنزين 92 (رسمي)</span><b class="mk-v num">22.25 ج.م / لتر</b><span class="mk-s">محطات الوقود — 25/09/2026</span></div>
-<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-fuel"/></svg>تعبئة بنزين الموتوسيكل</span><b class="mk-v num">445 ج.م (20 لتر) — كل 10–14 يوم</b><span class="mk-s">بنزين 92 × 20 لتر — 27/09/2026</span></div>
-<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-gauge"/></svg>زيت وصيانة دورية</span><b class="mk-v num">620 ج.م/1000 كم + 350 دوري</b><span class="mk-s">بيان المستخدم — 27/09/2026</span></div>
-<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>الدولار (بيع البنوك)</span><b class="mk-v num">51.96 – 52.18 ج.م</b><span class="mk-s">البنوك المصرية — 21/09/2026</span></div>
-<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg>التضخم السنوي</span><b class="mk-v num">12.7% عام / 14.5% مدن</b><span class="mk-s">المركزي للإحصاء — أغسطس 2026</span></div>
-<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-shopping-basket"/></svg>فراخ بيضاء (تجزئة)</span><b class="mk-v num">78 – 81 ج.م / كجم</b><span class="mk-s">سوق القاهرة — 26/09/2026</span></div>
-<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-heart-pulse"/></svg>لحوم بلدية كندوز</span><b class="mk-v num">400 – 450 ج.م / كجم</b><span class="mk-s">أسواق المنافذ — سبتمبر 2026</span></div>
-<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-utensils"/></svg>وجبة مطعم رخيصة</span><b class="mk-v num">250 ج.م (100 – 500)</b><span class="mk-s">Numbeo القاهرة — 21/09/2026</span></div>
-<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-coffee"/></svg>كابتشينو</span><b class="mk-v num">91 ج.م (35 – 150)</b><span class="mk-s">Numbeo القاهرة — 21/09/2026</span></div>
-<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-smartphone"/></svg>خطة موبايل شهرية</span><b class="mk-v num">436 ج.م (10 جيجا+)</b><span class="mk-s">Numbeo القاهرة — 21/09/2026</span></div>
-<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg>متوسط راتب صافي</span><b class="mk-v num">10,516 ج.م</b><span class="mk-s">Numbeo القاهرة — 21/09/2026</span></div></div><div class="mk-cols"><div><div class="mk-h"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg> أثر الأسعار على خطتك</div><ul class="mk-ul"><li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>تعبئة بنزين الموتوسيكل 20 لتر = 445 ج.م بتمشي 10–14 يوم، أي 970–1,350 ج.م وقود شهريًا (22.25 ج.م/لتر).</span></li>
-<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>زيت 620 ج.م كل 1000 كم + صيانة دورية 350 ج.م كل شهر أو شهرين (175 متوسط) — وقود وصيانة دورية = 1,130–1,690 ج.م/شهر (زيت إضافي حسب الكيلومترات) مقابل 2,200 ج.م في خطة أكتوبر بعد إعادة التوزيع المعتمدة بتاريخ 27/09.</span></li>
-<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>400 ج.م بقالة = حوالي 5 كجم فراخ + سلة خضار وحبوب — اللحوم الحمراء (479 ج.م/كجم) خارج الميزانية الشهرية.</span></li>
-<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>400 ج.م مطاعم = 1.6 وجبة بالمتوسط أو 4 وجبات شعبية في الأسبوع (100 ج.م).</span></li>
-<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>200 ج.م كافيهات = 2.2 كابتشينو بالمتوسط — تقريبًا نصف كوباية في الأسبوع.</span></li>
-<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>200 ج.م اشتراكات = 3.8 دولار — لو عندك اشتراك دولي (نتفليكس حوالي 10 دولار) الميزانية مش هتكفيه.</span></li>
-<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>التضخم الحضري 14.5% = قوة الشراء بتقل حوالي 1.1% كل شهر لو الراتب ما اترفعش.</span></li></ul></div><div><div class="mk-h"><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg> أخبار تؤثر في مصروفاتك</div><ul class="mk-ul"><li><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg><span>مراجعة أسعار الوقود: توقعات بزيادة خلال أكتوبر<span class="mk-date">21/09/2026 — لو الزيادة تمت تعبئة الموتوسيكل (445 ج.م) هتروح ≈470–490 ج.م — تكلفة الشهر تزيد 100–150 ج.م فوق ميزانية الوقود.</span></span></li>
-<li><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg><span>رفع الفائدة الأمريكية 18/09/2026<span class="mk-date">18/09/2026 — ضغط على الجنيه وأثر محتمل على الاشتراكات والبضائع المستوردة بعد شهرين.</span></span></li>
-<li><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg><span>التضخم تراجع لـ12.7% عام و14.5% في المدن أغسطس<span class="mk-date">10/09/2026 — الغذاء انخفض 1.2% شهريًا (خضروات -7%) — أرخص وقت لترفع البقالة البيتية.</span></span></li></ul></div></div><div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> الأرقام دي بتتحدّث أسبوعيًا كل سبت وأمام أي خطة شهرية، والمصدر الكامل بتواريخه في وثيقة الأسعار داخل المجلد المحلي.</div></section>
 
   <section id="log">
     <div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-square-pen"/></svg>
-      <h2>تسجيل سريع — سحب أو دخل</h2>
-      <span class="hint">يُحفظ في هذا الجهاز</span>
+      <h2>تسجيل سريع — سحب أو وارد أو تحويل</h2>
+      <span class="hint">بيحرّك رصيد الحساب فوراً</span>
     </div>
 
     <div class="seg" role="tablist">
-      <button type="button" class="seg-btn on" id="seg_out" onclick="setType('out')"><svg class="ic" aria-hidden="true"><use href="#ic-trending-down"/></svg> سحب / مصروف</button>
-      <button type="button" class="seg-btn t-in" id="seg_in" onclick="setType('in')"><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg> دخل / وارد</button>
+      <button type="button" class="seg-btn on" id="seg_out" onclick="setType('out')"><svg class="ic" aria-hidden="true"><use href="#ic-trending-down"/></svg> سحب</button>
+      <button type="button" class="seg-btn t-in" id="seg_in" onclick="setType('in')"><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg> وارد</button>
+      <button type="button" class="seg-btn t-tr" id="seg_tr" onclick="setType('tr')"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg> تحويل</button>
     </div>
 
     <div class="form">
       <input type="date" id="lg_d" aria-label="التاريخ">
       <input type="number" id="lg_a" placeholder="المبلغ (EGP)" inputmode="numeric" min="1" aria-label="المبلغ">
+      <select id="lg_from" aria-label="من حساب"></select>
+      <select id="lg_to" aria-label="إلى حساب"></select>
       <input type="text" id="lg_n" placeholder="ملاحظة (بنزين / راتب...)" maxlength="40" aria-label="ملاحظة">
       <button class="btn btn-pri" onclick="addEntry()"><svg class="ic" aria-hidden="true"><use href="#ic-plus"/></svg> إضافة</button>
+      <div class="lg-err" id="lg_err" hidden></div>
     </div>
 
     <div class="stats">
@@ -583,9 +607,32 @@
       <button class="btn btn-danger" onclick="wipeLog()"><svg class="ic" aria-hidden="true"><use href="#ic-x"/></svg> مسح السجل</button>
     </div>
 
-    <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> التسجيلات محفوظة داخل متصفح هذا الجهاز فقط — لو فتحت من جهاز
-    آخر هتلاقيه فاضي. أول ما تيجي للمحاسب: اضغط «نسخ التقرير» والصقه هنا بضغطة واحدة.</div>
+    <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> كل تسجيل لازم يكون مربوط بحساب — «سحب» بيخصم من الحساب
+    المختار، «وارد» بيزيد عليه، و«تحويل» ينقل فلوس من حساب لحساب من غير ما يتغير
+    إجماليك. البيانات محفوظة داخل متصفح هذا الجهاز — أول ما تيجي للمحاسب اضغط
+    «نسخ التقرير» والصقه هنا بضغطة واحدة، ولتثبيت الأرصدة في الملف استخدم
+    «نسخ accounts.json» فوق.</div>
   </section>
+
+  <section id="market"><div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg><h2>نبض السوق — Cairo</h2><span class="hint">آخر فحص: 27/09/2026 — تحديث أسبوعي</span></div><div class="mk"><div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-fuel"/></svg>بنزين 92 (رسمي)</span><b class="mk-v num">22.25 ج.م / لتر</b><span class="mk-s">محطات الوقود — 25/09/2026</span></div>
+<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-fuel"/></svg>تعبئة بنزين الموتوسيكل</span><b class="mk-v num">445 ج.م (20 لتر) — كل 10–14 يوم</b><span class="mk-s">بنزين 92 × 20 لتر — 27/09/2026</span></div>
+<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-gauge"/></svg>زيت وصيانة دورية</span><b class="mk-v num">620 ج.م/1000 كم + 350 دوري</b><span class="mk-s">بيان المستخدم — 27/09/2026</span></div>
+<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>الدولار (بيع البنوك)</span><b class="mk-v num">51.96 – 52.18 ج.م</b><span class="mk-s">البنوك المصرية — 21/09/2026</span></div>
+<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg>التضخم السنوي</span><b class="mk-v num">12.7% عام / 14.5% مدن</b><span class="mk-s">المركزي للإحصاء — أغسطس 2026</span></div>
+<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-shopping-basket"/></svg>فراخ بيضاء (تجزئة)</span><b class="mk-v num">78 – 81 ج.م / كجم</b><span class="mk-s">سوق القاهرة — 26/09/2026</span></div>
+<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-heart-pulse"/></svg>لحوم بلدية كندوز</span><b class="mk-v num">400 – 450 ج.م / كجم</b><span class="mk-s">أسواق المنافذ — سبتمبر 2026</span></div>
+<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-utensils"/></svg>وجبة مطعم رخيصة</span><b class="mk-v num">250 ج.م (100 – 500)</b><span class="mk-s">Numbeo القاهرة — 21/09/2026</span></div>
+<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-coffee"/></svg>كابتشينو</span><b class="mk-v num">91 ج.م (35 – 150)</b><span class="mk-s">Numbeo القاهرة — 21/09/2026</span></div>
+<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-smartphone"/></svg>خطة موبايل شهرية</span><b class="mk-v num">436 ج.م (10 جيجا+)</b><span class="mk-s">Numbeo القاهرة — 21/09/2026</span></div>
+<div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg>متوسط راتب صافي</span><b class="mk-v num">10,516 ج.م</b><span class="mk-s">Numbeo القاهرة — 21/09/2026</span></div></div><div class="mk-cols"><div><div class="mk-h"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg> أثر الأسعار على خطتك</div><ul class="mk-ul"><li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>تعبئة بنزين الموتوسيكل 20 لتر = 445 ج.م بتمشي 10–14 يوم، أي 970–1,350 ج.م وقود شهريًا (22.25 ج.م/لتر).</span></li>
+<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>زيت 620 ج.م كل 1000 كم + صيانة دورية 350 ج.م كل شهر أو شهرين (175 متوسط) — وقود وصيانة دورية = 1,130–1,690 ج.م/شهر (زيت إضافي حسب الكيلومترات) مقابل 2,200 ج.م في خطة أكتوبر بعد إعادة التوزيع المعتمدة بتاريخ 27/09.</span></li>
+<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>400 ج.م بقالة = حوالي 5 كجم فراخ + سلة خضار وحبوب — اللحوم الحمراء (479 ج.م/كجم) خارج الميزانية الشهرية.</span></li>
+<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>400 ج.م مطاعم = 1.6 وجبة بالمتوسط أو 4 وجبات شعبية في الأسبوع (100 ج.م).</span></li>
+<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>200 ج.م كافيهات = 2.2 كابتشينو بالمتوسط — تقريبًا نصف كوباية في الأسبوع.</span></li>
+<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>200 ج.م اشتراكات = 3.8 دولار — لو عندك اشتراك دولي (نتفليكس حوالي 10 دولار) الميزانية مش هتكفيه.</span></li>
+<li><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg><span>التضخم الحضري 14.5% = قوة الشراء بتقل حوالي 1.1% كل شهر لو الراتب ما اترفعش.</span></li></ul></div><div><div class="mk-h"><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg> أخبار تؤثر في مصروفاتك</div><ul class="mk-ul"><li><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg><span>مراجعة أسعار الوقود: توقعات بزيادة خلال أكتوبر<span class="mk-date">21/09/2026 — لو الزيادة تمت تعبئة الموتوسيكل (445 ج.م) هتروح ≈470–490 ج.م — تكلفة الشهر تزيد 100–150 ج.م فوق ميزانية الوقود.</span></span></li>
+<li><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg><span>رفع الفائدة الأمريكية 18/09/2026<span class="mk-date">18/09/2026 — ضغط على الجنيه وأثر محتمل على الاشتراكات والبضائع المستوردة بعد شهرين.</span></span></li>
+<li><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg><span>التضخم تراجع لـ12.7% عام و14.5% في المدن أغسطس<span class="mk-date">10/09/2026 — الغذاء انخفض 1.2% شهريًا (خضروات -7%) — أرخص وقت لترفع البقالة البيتية.</span></span></li></ul></div></div><div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> الأرقام دي بتتحدّث أسبوعيًا كل سبت وأمام أي خطة شهرية، والمصدر الكامل بتواريخه في وثيقة الأسعار داخل المجلد المحلي.</div></section>
 
   <section id="plan">
     <div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-clipboard-list"/></svg>
@@ -627,14 +674,14 @@
   </section>
 
 </div>
-<footer><svg class="ic" aria-hidden="true"><use href="#ic-shield-check"/></svg> بياناتك مبنية على جهازك وتُحدَّث من الرسايل الخام · تاريخ البناء 27/09/2026</footer>
+<footer><svg class="ic" aria-hidden="true"><use href="#ic-shield-check"/></svg> بياناتك مبنية على جهازك وتُحدَّث من الرسايل الخام · تاريخ البناء 28/09/2026</footer>
 
 <nav class="tabbar" id="tabbar" aria-label="تنقل سريع بين الأقسام">
   <button type="button" class="tb on" data-t="sum"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg><span class="t">ملخص</span></button>
   <button type="button" class="tb" data-t="accounts"><svg class="ic" aria-hidden="true"><use href="#ic-layout-dashboard"/></svg><span class="t">الحسابات</span></button>
   <button type="button" class="tb" data-t="log"><svg class="ic" aria-hidden="true"><use href="#ic-square-pen"/></svg><span class="t">تسجيل</span></button>
-  <button type="button" class="tb" data-t="plan"><svg class="ic" aria-hidden="true"><use href="#ic-clipboard-list"/></svg><span class="t">الخطة</span></button>
   <button type="button" class="tb" data-t="market"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg><span class="t">الأسعار</span></button>
+  <button type="button" class="tb" data-t="plan"><svg class="ic" aria-hidden="true"><use href="#ic-clipboard-list"/></svg><span class="t">الخطة</span></button>
   <button type="button" class="tb" data-t="dl"><svg class="ic" aria-hidden="true"><use href="#ic-download"/></svg><span class="t">تقارير</span></button>
 </nav>
 
@@ -680,8 +727,14 @@ var EDIT = -1, EDTYPE = "out";
 
 function setType(t) {
   TYPE = t;
-  document.getElementById("seg_out").classList.toggle("on", t === "out");
-  document.getElementById("seg_in").classList.toggle("on", t === "in");
+  ["out", "in", "tr"].forEach(function (k) {
+    var el = document.getElementById("seg_" + k);
+    if (el) el.classList.toggle("on", t === k);
+  });
+  var f = document.getElementById("lg_from"), o = document.getElementById("lg_to");
+  if (f) f.style.display = (t === "in") ? "none" : "";
+  if (o) o.style.display = (t === "out") ? "none" : "";
+  lgErr("");
 }
 function localISO() {
   var d = new Date();
@@ -714,17 +767,110 @@ function escj(s) {
 function escAttr(s) {
   return escj(s).replace(/"/g, "&quot;");
 }
+
+/* ===== account balances: base (SMS / accounts.json / typed) + log deltas =====
+   The displayed balance of an account = mfBase(id) + sum of log entries that
+   touch it. That way editing/deleting a log entry can never desync: nothing is
+   written into the balance, it is always recomputed. A typed override lives in
+   localStorage as "mf_acc_base:<id>"; "إرجاع" just removes it.            */
+function mfRow(id) {
+  var t = document.getElementById("acc_tbl");
+  return t ? t.querySelector('tr.acc[data-aid="' + id + '"]') : null;
+}
+function mfBase(id) {
+  var v = null;
+  try { v = localStorage.getItem("mf_acc_base:" + id); } catch (e) {}
+  if (v !== null && v !== "") {
+    var p = parseFloat(v);
+    if (isFinite(p)) return p;
+  }
+  var r = mfRow(id);
+  if (!r) return 0;
+  var b = parseFloat(r.getAttribute("data-bal") || "");
+  return isFinite(b) ? b : 0;
+}
+function mfDeltas() {
+  var d = {}, arr = loadLog(), i, e, a;
+  for (i = 0; i < arr.length; i++) {
+    e = arr[i];
+    a = parseFloat(e.a) || 0;
+    if (e.t === "tr") {
+      if (e.f) d[e.f] = (d[e.f] || 0) - a;
+      if (e.o) d[e.o] = (d[e.o] || 0) + a;
+    } else if (e.t === "in") {
+      if (e.o) d[e.o] = (d[e.o] || 0) + a;
+    } else if (e.f) {
+      d[e.f] = (d[e.f] || 0) - a;
+    }
+  }
+  return d;
+}
+function mfBal(id) { return mfBase(id) + (mfDeltas()[id] || 0); }
+function mfSetBase(id, v) {
+  try {
+    localStorage.setItem("mf_acc_base:" + id,
+      String(Math.round(v * 100) / 100));
+  } catch (e) {}
+  mfFire();
+}
+function mfFire() { if (window.mfRecalc) window.mfRecalc(); }
+function accNames() {
+  var out = {}, rows = document.querySelectorAll("#acc_tbl tr.acc");
+  for (var i = 0; i < rows.length; i++)
+    out[rows[i].getAttribute("data-aid")] = rows[i].getAttribute("data-name");
+  return out;
+}
+function accOptions() {
+  var names = accNames(),
+      h = '<option value="">اختار الحساب</option>', id;
+  for (id in names)
+    if (Object.prototype.hasOwnProperty.call(names, id))
+      h += '<option value="' + escAttr(id) + '">' + escj(names[id]) + "</option>";
+  return h;
+}
+function fillAccountSelects() {
+  ["lg_from", "lg_to"].forEach(function (i) {
+    var el = document.getElementById(i);
+    if (el) el.innerHTML = accOptions();
+  });
+}
+function lgErr(msg, bad) {
+  var e = document.getElementById("lg_err");
+  if (e) { e.textContent = msg || ""; e.hidden = !msg; }
+  ["lg_from", "lg_to"].forEach(function (i) {
+    var el = document.getElementById(i);
+    if (el) el.classList.toggle("err", !!(bad && bad.indexOf(i) >= 0));
+  });
+}
+function entryAccountLabel(e) {
+  var nm = accNames(), a = [];
+  if (e.t === "tr") {
+    if (e.f) a.push("من " + (nm[e.f] || e.f));
+    if (e.o) a.push("إلى " + (nm[e.o] || e.o));
+  } else if (e.t === "in") {
+    if (e.o) a.push("إلى " + (nm[e.o] || e.o));
+  } else if (e.f) {
+    a.push("من " + (nm[e.f] || e.f));
+  }
+  return a.join(" ");
+}
+
 function totals() {
   var arr = loadLog(), ws = weekStartISO(), mpre = ws.slice(0, 7);
-  var wk = 0, mIn = 0, mOut = 0;
+  var wk = 0, mIn = 0, mOut = 0, mTr = 0, nTr = 0;
   for (var i = 0; i < arr.length; i++) {
-    var e = arr[i], isIn = (e.t === "in");
+    var e = arr[i], isIn = (e.t === "in"), isTr = (e.t === "tr");
+    if (isTr) {
+      if (String(e.d).slice(0, 7) === mpre) { mTr += e.a; nTr++; }
+      continue;
+    }
     if (e.d >= ws && !isIn) wk += e.a;
     if (String(e.d).slice(0, 7) === mpre) {
       if (isIn) mIn += e.a; else mOut += e.a;
     }
   }
-  return { wk: wk, mIn: mIn, mOut: mOut, mpre: mpre, n: arr.length, arr: arr };
+  return { wk: wk, mIn: mIn, mOut: mOut, mTr: mTr, nTr: nTr,
+           mpre: mpre, n: arr.length, arr: arr };
 }
 function renderLog() {
   var T = totals();
@@ -748,13 +894,17 @@ function renderLog() {
     return;
   }
   var rows = "";
+  var opts = accOptions();
+  var ed = (EDIT >= 0 && EDIT < T.arr.length) ? T.arr[EDIT] : null;
   for (var i = T.arr.length - 1; i >= 0; i--) {
-    var e = T.arr[i], isIn = (e.t === "in");
+    var e = T.arr[i], isIn = (e.t === "in"), isTr = (e.t === "tr");
+    var tone = isTr ? "tone-blue" : (isIn ? "tone-green" : "tone-red");
+    var icon = isTr ? "refresh-cw" : (isIn ? "trending-up" : "trending-down");
     if (i === EDIT) {
       rows += '<div class="log-row editing">' +
-        '<span class="lic ' + (EDTYPE === "in" ? "tone-green" : "tone-red") + '">' +
-          '<svg class="ic" aria-hidden="true"><use href="#ic-' +
-          (EDTYPE === "in" ? "trending-up" : "trending-down") + '"/></svg></span>' +
+        '<span class="lic ' + tone + '">' +
+          '<svg class="ic" aria-hidden="true"><use href="#ic-' + icon +
+          '"/></svg></span>' +
         '<div class="li-main">' +
           '<div class="ed-f">' +
             '<input type="date" id="ed_d" value="' + String(e.d) +
@@ -763,12 +913,16 @@ function renderLog() {
               '" min="1" inputmode="numeric" aria-label="المبلغ" onkeydown="if(event.key==\'Enter\')saveEdit();if(event.key==\'Escape\')cancelEdit();">' +
             '<input type="text" id="ed_n" value="' + escAttr(e.n || "") +
               '" maxlength="40" placeholder="ملاحظة" aria-label="ملاحظة" onkeydown="if(event.key==\'Enter\')saveEdit();if(event.key==\'Escape\')cancelEdit();">' +
+            '<select id="ed_f" aria-label="من حساب">' + opts + '</select>' +
+            '<select id="ed_o" aria-label="إلى حساب">' + opts + '</select>' +
           '</div>' +
           '<div class="ed-t">' +
             '<button type="button" class="ed-b' + (EDTYPE === "out" ? " on" : "") +
-              '" id="edt_out" onclick="setEdType(\'out\')">سحب / مصروف</button>' +
+              '" id="edt_out" onclick="setEdType(\'out\')">سحب</button>' +
             '<button type="button" class="ed-b' + (EDTYPE === "in" ? " on" : "") +
-              '" id="edt_in" onclick="setEdType(\'in\')">دخل / وارد</button>' +
+              '" id="edt_in" onclick="setEdType(\'in\')">وارد</button>' +
+            '<button type="button" class="ed-b' + (EDTYPE === "tr" ? " on" : "") +
+              '" id="edt_tr" onclick="setEdType(\'tr\')">تحويل</button>' +
           '</div>' +
         '</div>' +
         '<button class="del ok" onclick="saveEdit()" aria-label="حفظ التعديل" title="حفظ">' +
@@ -778,16 +932,20 @@ function renderLog() {
         '</div>';
       continue;
     }
+    var sub = entryAccountLabel(e);
     rows += '<div class="log-row">' +
-      '<span class="lic ' + (isIn ? "tone-green" : "tone-red") + '">' +
-        '<svg class="ic" aria-hidden="true"><use href="#ic-' +
-        (isIn ? "trending-up" : "trending-down") + '"/></svg></span>' +
+      '<span class="lic ' + tone + '">' +
+        '<svg class="ic" aria-hidden="true"><use href="#ic-' + icon +
+        '"/></svg></span>' +
       '<div class="li-main">' +
-        '<div class="li-t">' + (isIn ? "دخل" : "سحب") + " · " + fmtDate(e.d) + '</div>' +
+        '<div class="li-t">' +
+          (isTr ? "تحويل" : (isIn ? "دخل" : "سحب")) + " · " + fmtDate(e.d) +
+        '</div>' +
         (e.n ? '<div class="li-s">' + escj(e.n) + '</div>' : '') +
+        (sub ? '<div class="li-s">' + escj(sub) + '</div>' : '') +
       '</div>' +
-      '<span class="li-amt ' + (isIn ? "v-green" : "v-red") + '">' +
-        (isIn ? "+" : "-") + e.a + ' EGP</span>' +
+      '<span class="li-amt ' + (isTr ? "t-tr" : (isIn ? "v-green" : "v-red")) + '">' +
+        (isTr ? "" : (isIn ? "+" : "-")) + e.a + ' EGP</span>' +
       '<button class="del ed" onclick="editEntry(' + i + ')" aria-label="تعديل" title="تعديل">' +
         '<svg class="ic" aria-hidden="true"><use href="#ic-square-pen"/></svg></button>' +
       '<button class="del" onclick="delEntry(' + i + ')" aria-label="حذف" title="حذف">' +
@@ -795,27 +953,65 @@ function renderLog() {
       '</div>';
   }
   box.innerHTML = rows;
+  if (ed) {
+    var ef = document.getElementById("ed_f"), eo = document.getElementById("ed_o");
+    if (ef) ef.value = ed.f || "";
+    if (eo) eo.value = ed.o || "";
+    setEdType(EDTYPE);
+  }
+}
+function readEntryFields() {
+  var t = TYPE,
+      f = document.getElementById("lg_from"),
+      o = document.getElementById("lg_to"),
+      e = { t: t };
+  if (t !== "in") e.f = f ? f.value : "";
+  if (t !== "out") e.o = o ? o.value : "";
+  return e;
+}
+function validate(e) {
+  var bad = [];
+  if (e.t === "tr") {
+    if (!e.f) bad.push("lg_from");
+    if (!e.o) bad.push("lg_to");
+    if (bad.length)
+      return ["اختار الحسابين: اللي هيخرج منه واللي هيدخل عليه", bad];
+    if (e.f === e.o) return ["لازم حسابين مختلفين في التحويل", bad];
+  } else if (e.t === "in") {
+    if (!e.o) return ["اختار الحساب اللي هيدخل عليه", ["lg_to"]];
+  } else if (!e.f) {
+    return ["اختار الحساب اللي هيخصم منه", ["lg_from"]];
+  }
+  return null;
 }
 function addEntry() {
   var a = parseInt(document.getElementById("lg_a").value, 10);
   var d = document.getElementById("lg_d").value || localISO();
   var n = document.getElementById("lg_n").value.trim();
+  var f = document.getElementById("lg_a");
   if (!a || a <= 0) {
-    var f = document.getElementById("lg_a");
     f.style.borderColor = "var(--red)";
     f.focus();
     return;
   }
-  document.getElementById("lg_a").style.borderColor = "";
+  f.style.borderColor = "";
+  var e = readEntryFields();
+  var bad = validate(e);
+  if (bad) { lgErr(bad[0], bad[1]); return; }
+  lgErr("");
   var arr = loadLog();
-  arr.push({ d: d, a: a, n: n, t: TYPE });
+  var rec = { d: d, a: a, n: n, t: e.t };
+  if (e.f) rec.f = e.f;
+  if (e.o) rec.o = e.o;
+  arr.push(rec);
   arr.sort(function (x, y) { return x.d < y.d ? -1 : (x.d > y.d ? 1 : 0); });
   saveLog(arr);
   EDIT = -1;
-  document.getElementById("lg_a").value = "";
+  f.value = "";
   document.getElementById("lg_n").value = "";
-  document.getElementById("lg_a").focus();
+  f.focus();
   renderLog();
+  mfFire();
 }
 function delEntry(i) {
   var arr = loadLog();
@@ -823,21 +1019,26 @@ function delEntry(i) {
   saveLog(arr);
   if (EDIT === i) EDIT = -1;
   renderLog();
+  mfFire();
 }
 function editEntry(i) {
   var arr = loadLog();
   if (i < 0 || i >= arr.length) return;
   EDIT = i;
-  EDTYPE = arr[i].t === "in" ? "in" : "out";
+  EDTYPE = arr[i].t || "out";
   renderLog();
   var f = document.getElementById("ed_a");
   if (f) { f.focus(); f.select(); }
 }
 function setEdType(t) {
   EDTYPE = t;
-  var o = document.getElementById("edt_out"), n = document.getElementById("edt_in");
-  if (o) o.classList.toggle("on", t === "out");
-  if (n) n.classList.toggle("on", t === "in");
+  ["out", "in", "tr"].forEach(function (k) {
+    var b = document.getElementById("edt_" + k);
+    if (b) b.classList.toggle("on", t === k);
+  });
+  var lf = document.getElementById("ed_f"), lo = document.getElementById("ed_o");
+  if (lf) lf.style.display = (t === "in") ? "none" : "";
+  if (lo) lo.style.display = (t === "out") ? "none" : "";
 }
 function cancelEdit() {
   EDIT = -1;
@@ -854,38 +1055,59 @@ function saveEdit() {
   }
   if (f) f.style.borderColor = "";
   var dEl = document.getElementById("ed_d"), nEl = document.getElementById("ed_n");
+  var lf = document.getElementById("ed_f"), lo = document.getElementById("ed_o");
   var d = (dEl && dEl.value) || arr[EDIT].d;
   var n = nEl ? nEl.value.trim() : (arr[EDIT].n || "");
-  arr[EDIT] = { d: d, a: a, n: n, t: EDTYPE };
+  var e = { d: d, a: a, n: n, t: EDTYPE };
+  if (EDTYPE !== "in") e.f = lf ? lf.value : "";
+  if (EDTYPE !== "out") e.o = lo ? lo.value : "";
+  var bad = validate(e);
+  if (bad) {
+    if (lf) lf.classList.toggle("err", bad[1].indexOf("lg_from") >= 0);
+    if (lo) lo.classList.toggle("err", bad[1].indexOf("lg_to") >= 0);
+    alert(bad[0]);
+    return;
+  }
+  if (lf) lf.classList.remove("err");
+  if (lo) lo.classList.remove("err");
+  arr[EDIT] = e;
   arr.sort(function (x, y) { return x.d < y.d ? -1 : (x.d > y.d ? 1 : 0); });
   saveLog(arr);
   EDIT = -1;
   renderLog();
+  mfFire();
 }
 function wipeLog() {
   if (confirm("هتمسح كل تسجيلات الشهر ده — متأكد؟")) {
     saveLog([]);
     EDIT = -1;
     renderLog();
+    mfFire();
   }
 }
 function copyReport() {
   var T = totals();
   if (!T.n) { alert("لا توجد تسجيلات بعد"); return; }
-  var outs = [], ins = [];
+  var outs = [], ins = [], trs = [];
   for (var i = 0; i < T.arr.length; i++) {
-    var e = T.arr[i], line = "- " + fmtDate(e.d) + ": " + e.a + " EGP" +
-      (e.n ? " (" + e.n + ")" : "");
-    if (e.t === "in") ins.push(line); else outs.push(line);
+    var e = T.arr[i], acc = entryAccountLabel(e);
+    var line = "- " + fmtDate(e.d) + ": " + e.a + " EGP" +
+      (e.n ? " (" + e.n + ")" : "") +
+      (acc ? " [" + acc + "]" : "");
+    if (e.t === "in") ins.push(line);
+    else if (e.t === "tr") trs.push(line);
+    else outs.push(line);
   }
   var txt = "تقرير التسجيل — الشهر " + T.mpre + "\n\n";
   if (ins.length) txt += "الدخل:\n" + ins.join("\n") + "\n\n";
   if (outs.length) txt += "المصروفات:\n" + outs.join("\n") + "\n\n";
+  if (trs.length) txt += "تحويلات بين الحسابات:\n" + trs.join("\n") + "\n\n";
   txt += "مصروف الأسبوع: " + Math.round(T.wk) + " من " + Math.round(CAP) +
          " (المتبقي " + Math.round(CAP - T.wk) + ")\n" +
          "الشهر: دخل " + Math.round(T.mIn) + " | مصروف " + Math.round(T.mOut) +
          " | الصافي " + (T.mIn - T.mOut > 0 ? "+" : "") +
-         Math.round(T.mIn - T.mOut) + " EGP";
+         Math.round(T.mIn - T.mOut) + " EGP" +
+         (T.nTr ? " | تحويلات " + T.nTr + " بقيمة " + Math.round(T.mTr) + " EGP" : "");
   function manualCopy(t) {
     var ta = document.createElement("textarea");
     ta.value = t;
@@ -924,6 +1146,8 @@ function copyReport() {
 (function initLog() {
   var di = document.getElementById("lg_d");
   if (di && !di.value) di.value = localISO();
+  fillAccountSelects();
+  setType(TYPE);
   renderLog();
 })();
 
@@ -932,6 +1156,8 @@ function copyReport() {
   var sec = document.getElementById("accounts");
   if (!sec) return;
   var PRE = "mf_acc_";
+  window.mfRecalc = recalc;
+  window.mfRefresh = function () { syncToggles(); recalc(); };
   function g(k, d) {
     var v = null;
     try { v = localStorage.getItem(PRE + k); } catch (e) {}
@@ -945,12 +1171,36 @@ function copyReport() {
   function qs(sel, root) { return (root || sec).querySelector(sel); }
   function all(sel) { return sec.querySelectorAll(sel); }
   function rowById(id) { return qs('tr.acc[data-aid="' + id + '"]'); }
-
-  function balOf(tr) {
-    var ov = g("bal:" + tr.getAttribute("data-aid"), "");
-    var v = ov === "" ? parseFloat(tr.getAttribute("data-bal") || "0") : parseFloat(ov);
-    return isFinite(v) ? v : 0;
+  function hasBase(id) {
+    try {
+      var v = localStorage.getItem(PRE + "base:" + id);
+      return v !== null && v !== "";
+    } catch (e) { return false; }
   }
+  function cellHTML(id) {
+    return '<span class="bv"></span>' +
+      '<button type="button" class="ed" data-ed="' + id + '">تعديل</button>' +
+      '<button type="button" class="rs" data-rs="' + id + '"' +
+      (hasBase(id) ? "" : " hidden") + '>إرجاع</button>';
+  }
+  /* older builds stored the override under mf_acc_bal:<id> — move it over */
+  (function migrate() {
+    try {
+      var old = [], i, k;
+      for (i = 0; i < localStorage.length; i++) {
+        k = localStorage.key(i);
+        if (k && k.indexOf(PRE + "bal:") === 0) old.push(k);
+      }
+      for (i = 0; i < old.length; i++) {
+        var aid = old[i].slice((PRE + "bal:").length);
+        if (!hasBase(aid)) {
+          var val = localStorage.getItem(old[i]);
+          if (val !== null && val !== "") localStorage.setItem(PRE + "base:" + aid, val);
+        }
+        localStorage.removeItem(old[i]);
+      }
+    } catch (e) {}
+  })();
 
   function syncToggles() {
     var bs = all("[data-tg]");
@@ -988,11 +1238,13 @@ function copyReport() {
       var id = tr.getAttribute("data-aid");
       var on = g("on:" + id, tr.getAttribute("data-on") || "1") === "1";
       var gon = g("gon:" + gid, "1") === "1";
-      var bal = balOf(tr);
+      var bal = mfBal(id);
       var egp = bal * rate;
       tr.classList.toggle("off", !(on && gon));
       var bv = qs(".bv", tr); if (bv) bv.textContent = fmtB(bal);
       var eq = qs(".eq", tr); if (eq) eq.textContent = fmtB(egp);
+      var rsv = qs(".rs", tr);
+      if (rsv) rsv.hidden = !hasBase(id);
       if (on && gs[gid] !== undefined) gs[gid] += egp;
       if (on && gon) { if (egp >= 0) A += egp; else L += -egp; }
     }
@@ -1027,7 +1279,7 @@ function copyReport() {
     inp.type = "number";
     inp.step = "any";
     inp.inputMode = "decimal";
-    inp.value = balOf(tr);
+    inp.value = mfBal(id);
     inp.setAttribute("aria-label", "رصيد الحساب");
     cell.innerHTML = "";
     cell.appendChild(inp);
@@ -1039,10 +1291,11 @@ function copyReport() {
       done = true;
       if (save) {
         var v = parseFloat(inp.value);
-        if (isFinite(v)) s("bal:" + id, String(v));
+        /* the typed number is the balance the user sees — so store it net of
+           the log deltas, otherwise adding them again would double count */
+        if (isFinite(v)) mfSetBase(id, v - (mfDeltas()[id] || 0));
       }
-      cell.innerHTML = '<span class="bv"></span>' +
-        '<button type="button" class="ed" data-ed="' + id + '">تعديل</button>';
+      cell.innerHTML = cellHTML(id);
       recalc();
     }
     inp.addEventListener("blur", function () { finish(true); });
@@ -1075,7 +1328,7 @@ function copyReport() {
         var b2 = box.getAttribute("data-bal");
         var note2 = box.querySelector(".pk-n");
         if (id2 && b2 !== "" && isFinite(parseFloat(b2))) {
-          s("bal:" + id2, b2);
+          mfSetBase(id2, parseFloat(b2));
           var r2 = rowById(id2);
           if (note2 && r2) note2.textContent = "تم ضبط رصيد " + r2.getAttribute("data-name");
         } else if (note2) {
@@ -1107,6 +1360,13 @@ function copyReport() {
       recalc();
       return;
     }
+    var rs = e.target.closest("[data-rs]");
+    if (rs) {
+      var rid = rs.getAttribute("data-rs");
+      try { localStorage.removeItem(PRE + "base:" + rid); } catch (x) {}
+      recalc();
+      return;
+    }
     var ed = e.target.closest("[data-ed]");
     if (ed) startEdit(ed.getAttribute("data-ed"));
   });
@@ -1115,6 +1375,77 @@ function copyReport() {
   applyPicks();
   recalc();
 })();
+
+/* ===== push the on-site state back into 03_System/accounts.json ===== */
+function exportCfg() {
+  var el = document.getElementById("acc_cfg");
+  if (!el) { alert("لا توجد نسخة من accounts.json داخل الصفحة"); return; }
+  var cfg;
+  try { cfg = JSON.parse(el.textContent); }
+  catch (e) { alert("تعذّرت قراءة accounts.json من الصفحة"); return; }
+  var touched = 0, moved = 0;
+  (cfg.groups || []).forEach(function (grp) {
+    try {
+      var gon = localStorage.getItem("mf_acc_gon:" + grp.id);
+      if (gon !== null && gon !== "") {
+        grp.in_total = (gon === "1"); moved++;
+      }
+    } catch (e) {}
+    (grp.accounts || []).forEach(function (a) {
+      var id = a.id, b = null;
+      try {
+        var on = localStorage.getItem("mf_acc_on:" + id);
+        if (on !== null && on !== "") { a.in_total = (on === "1"); moved++; }
+        b = localStorage.getItem("mf_acc_base:" + id);
+      } catch (e) {}
+      if (b !== null && b !== "" && isFinite(parseFloat(b))) {
+        a.balance = Math.round(parseFloat(b) * 100) / 100;
+        /* freeze it, otherwise an sms account would overwrite the typed value */
+        a.source = "manual";
+        touched++;
+      }
+    });
+  });
+  var txt = JSON.stringify(cfg, null, 2);
+  function download() {
+    try {
+      var blob = new Blob([txt], { type: "application/json;charset=utf-8" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "accounts.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+      alert("اتحمّل accounts.json — انقله فوق 03_System/accounts.json واضغط rebuild.\n" +
+        "رصيد عدّلته بيدك: " + touched + " · تبديل «في الإجمالي»: " + moved);
+    } catch (e) {
+      alert("تعذّر التحميل — النص تحت:\n\n" + txt.slice(0, 1500));
+    }
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(function () {
+      alert("اتنسخ accounts.json — الصقه في 03_System/accounts.json واضغط rebuild.\n" +
+        "رصيد عدّلته بيدك: " + touched + " · تبديل «في الإجمالي»: " + moved);
+    }).catch(download);
+  } else download();
+}
+
+function clearLocal() {
+  if (!confirm("هتمسح كل تعديلات الأرصدة و«في الإجمالي» المحفوظة في الجهاز ده؟\n" +
+               "الإدخالات (السجل) هتفضل مكانها.")) return;
+  try {
+    var drop = [], i, k;
+    for (i = 0; i < localStorage.length; i++) {
+      k = localStorage.key(i);
+      if (k && k.indexOf("mf_acc_") === 0) drop.push(k);
+    }
+    for (i = 0; i < drop.length; i++) localStorage.removeItem(drop[i]);
+  } catch (e) {}
+  if (window.mfRefresh) window.mfRefresh();
+  else if (window.mfRecalc) window.mfRecalc();
+}
 
 /* ===== bottom tab bar: tap to jump, highlight the visible section ===== */
 (function initTabs() {
