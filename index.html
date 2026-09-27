@@ -156,28 +156,94 @@
   }
   .seg-btn.on{background:#fff; color:var(--navy); box-shadow:0 1px 3px rgba(14,42,71,.16);}
   .seg-btn.on.t-in{color:var(--green);}
-  .form{display:flex; flex-wrap:wrap; gap:10px;}
+  #log .form{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+             gap:13px 14px; align-items:end;}
+  .fr{display:flex; flex-direction:column; gap:6px; min-width:0;}
+  .fl{font-size:.72rem; font-weight:800; letter-spacing:.07em;
+      text-transform:uppercase; color:var(--muted);}
+  .fr-wide, .fr-act{grid-column:1 / -1;}
+  .fr-act .btn{width:100%;}
   .form input{
     padding:11px 12px; min-height:44px; border:1px solid var(--line);
     border-radius:11px; font-size:.95rem; font-family:inherit; background:#fff;
-    color:var(--text);
+    color:var(--text); width:100%; box-sizing:border-box;
   }
   .form input:focus{outline:none; border-color:var(--blue);
     box-shadow:0 0 0 3px rgba(29,78,216,.14);}
-  #lg_d{width:165px;}
-  #lg_a{width:150px;}
-  #lg_n{flex:1 1 180px; min-width:0;}
   .form select{
     padding:11px 10px; min-height:44px; border:1px solid var(--line);
     border-radius:11px; font-size:.92rem; font-family:inherit; background:#fff;
-    color:var(--text); font-weight:600; max-width:215px;
+    color:var(--text); font-weight:600; width:100%; max-width:none;
+    box-sizing:border-box;
   }
   .form select:focus{outline:none; border-color:var(--blue);
     box-shadow:0 0 0 3px rgba(29,78,216,.14);}
   .form select.err{border-color:var(--red); box-shadow:0 0 0 3px rgba(185,28,28,.13);}
-  .lg-err{flex:1 1 100%; margin-top:-4px; color:var(--red);
+  .lg-err{grid-column:1 / -1; margin-top:-4px; color:var(--red);
     font-size:.8rem; font-weight:700;}
   .lg-err[hidden]{display:none;}
+
+  /* ---- category field + category sheet ---- */
+  .cat-pick{
+    display:flex; align-items:center; gap:9px; width:100%; min-height:44px;
+    padding:10px 12px; border:1px solid var(--line); border-radius:11px;
+    background:#fff; font:inherit; font-size:.95rem; color:var(--text);
+    cursor:pointer; text-align:start; box-sizing:border-box;
+  }
+  .cat-pick:focus{outline:none; border-color:var(--blue);
+    box-shadow:0 0 0 3px rgba(29,78,216,.14);}
+  .cat-pick.err{border-color:var(--red); box-shadow:0 0 0 3px rgba(185,28,28,.13);}
+  .cat-pick .cp-t{flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .cat-pick.is-empty .cp-t{color:var(--muted); font-weight:600;}
+  .cat-ov{position:fixed; inset:0; z-index:65; background:rgba(8,20,34,.55);
+          display:flex; align-items:flex-end; justify-content:center;}
+  .cat-ov[hidden]{display:none;}
+  .cat-box{background:#fff; width:100%; max-width:620px; max-height:80vh;
+           overflow:auto; border-radius:16px 16px 0 0;
+           box-shadow:0 -12px 34px rgba(0,0,0,.32);}
+  .cat-head{position:sticky; top:0; z-index:2; display:flex; align-items:center;
+            justify-content:space-between; gap:10px; padding:14px 16px;
+            background:#fff; border-bottom:1px solid var(--line);}
+  .cat-ops{display:flex; gap:7px;}
+  .cat-op{display:inline-flex; align-items:center; justify-content:center; gap:6px;
+          min-height:36px; padding:7px 12px; border-radius:9px;
+          border:1px solid var(--line); background:#fff; color:var(--muted);
+          font:inherit; font-size:.85rem; font-weight:700; cursor:pointer;}
+  .cat-op:hover{border-color:#C9D3E0; color:var(--text);}
+  .cat-op.on{background:var(--navy); border-color:var(--navy); color:#fff;}
+  .cat-op .ic{width:15px; height:15px;}
+  .cat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+            background:var(--line); border-bottom:1px solid var(--line);}
+  .cat-cell{position:relative; display:flex; flex-direction:column;
+            align-items:center; justify-content:center; gap:9px; padding:20px 8px;
+            min-height:92px; background:#fff; border:0; font:inherit;
+            font-size:.93rem; font-weight:700; color:var(--text); cursor:pointer;
+            text-align:center;}
+  .cat-cell:hover{background:#F4F7FB;}
+  .cat-cell.on{background:#EEF3FF; color:var(--navy);}
+  .cat-cell .ic{width:27px; height:27px; stroke-width:1.7;}
+  .cat-cell .rm{position:absolute; top:7px; inset-inline-end:7px; width:23px;
+                height:23px; border-radius:50%; background:var(--red-bg);
+                color:var(--red); display:flex; align-items:center;
+                justify-content:center;}
+  .cat-cell .rm .ic{width:13px; height:13px; stroke-width:2.4;}
+  .cat-cell.add{color:var(--muted); background:#FBFCFE;
+                box-shadow:inset 0 0 0 2px var(--line);}
+  .cat-new{display:flex; flex-wrap:wrap; gap:10px; padding:14px 16px;
+           background:#F8FAFD; border-bottom:1px solid var(--line);}
+  .cat-new[hidden]{display:none;}
+  .cat-new input{flex:1 1 150px; min-height:40px; padding:9px 11px;
+                 border:1px solid var(--line); border-radius:10px;
+                 font:inherit; font-size:.92rem; background:#fff; min-width:0;}
+  .cat-new select{min-height:40px; padding:8px 10px; border:1px solid var(--line);
+                  border-radius:10px; font:inherit; font-size:.9rem;
+                  background:#fff; max-width:150px;}
+  .cat-foot{padding:12px 16px 18px; text-align:center;}
+  .cat-foot[hidden]{display:none;}
+  .li-cat{display:inline-flex; align-items:center; gap:5px; padding:2px 8px;
+          border-radius:999px; background:#EEF3FF; color:var(--navy);
+          font-size:.73rem; font-weight:800; white-space:nowrap;}
+  .li-cat .ic{width:13px; height:13px; stroke-width:2.2;}
   .seg-btn.on.t-tr{color:var(--blue);}
   .li-amt.t-tr{color:var(--navy);}
   .btn{
@@ -212,7 +278,8 @@
   .lic{width:34px; height:34px; border-radius:10px; display:grid; place-items:center; flex:none;}
   .lic .ic{width:17px; height:17px;}
   .li-main{flex:1; min-width:0;}
-  .li-t{font-size:.92rem; font-weight:600;}
+  .li-t{display:flex; align-items:center; gap:7px; flex-wrap:wrap;
+        font-size:.92rem; font-weight:600;}
   .li-s{font-size:.77rem; color:var(--muted);}
   .li-amt{font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap; font-size:.95rem;}
   .del{
@@ -445,7 +512,7 @@
 </style>
 </head>
 <body class="locked">
-<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="ic-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="ic-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="ic-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 1-1 1v3a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V5"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol><symbol id="ic-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol><symbol id="ic-trending-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 17h6v-6"/><path d="m22 17-8.5-8.5-5 5L2 7"/></symbol><symbol id="ic-piggy-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z"/><path d="M16 10h.01"/><path d="M2 8v1a2 2 0 0 0 2 2h1"/></symbol><symbol id="ic-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol><symbol id="ic-calendar-days" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M8 13h.01"/><path d="M12 13h.01"/><path d="M16 13h.01"/><path d="M8 17h.01"/><path d="M12 17h.01"/><path d="M16 17h.01"/></symbol><symbol id="ic-calendar-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="m9 15 2 2 4-4"/></symbol><symbol id="ic-clipboard-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol><symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></symbol><symbol id="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol><symbol id="ic-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></symbol><symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol><symbol id="ic-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="ic-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></symbol><symbol id="ic-circle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol><symbol id="ic-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="ic-banknote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></symbol><symbol id="ic-fuel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6.998a2 2 0 0 0-.59-1.42L18 5"/><path d="M14 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16"/><path d="M2 21h13"/><path d="M3 9h11"/></symbol><symbol id="ic-smartphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="ic-shopping-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18"/><path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25"/><circle cx="18" cy="20" r="2"/><circle cx="8" cy="20" r="2"/></symbol><symbol id="ic-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol><symbol id="ic-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></symbol><symbol id="ic-shopping-basket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"/><path d="M4.5 15.5h15"/><path d="m5 11 4-7"/><path d="m9 11 1 9"/></symbol><symbol id="ic-heart-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></symbol><symbol id="ic-shirt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></symbol><symbol id="ic-refresh-cw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol><symbol id="ic-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol><symbol id="ic-file-spreadsheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/></symbol><symbol id="ic-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol><symbol id="ic-braces" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></symbol><symbol id="ic-table" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></symbol><symbol id="ic-layout-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></symbol><symbol id="ic-list-checks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></symbol><symbol id="ic-square-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></symbol><symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="ic-log-in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/></symbol><symbol id="ic-circle-dot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="12" r="10"/></symbol><symbol id="ic-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol></svg>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="ic-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol><symbol id="ic-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol><symbol id="ic-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 1-1 1v3a1 1 0 0 1-1 1H5a2 2 0 0 1-2-2V5"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol><symbol id="ic-trending-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></symbol><symbol id="ic-trending-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 17h6v-6"/><path d="m22 17-8.5-8.5-5 5L2 7"/></symbol><symbol id="ic-piggy-bank" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z"/><path d="M16 10h.01"/><path d="M2 8v1a2 2 0 0 0 2 2h1"/></symbol><symbol id="ic-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol><symbol id="ic-calendar-days" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M8 13h.01"/><path d="M12 13h.01"/><path d="M16 13h.01"/><path d="M8 17h.01"/><path d="M12 17h.01"/><path d="M16 17h.01"/></symbol><symbol id="ic-calendar-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="m9 15 2 2 4-4"/></symbol><symbol id="ic-clipboard-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></symbol><symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></symbol><symbol id="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol><symbol id="ic-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></symbol><symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol><symbol id="ic-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="ic-circle-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m16 9-5.5 5.5L8 12"/></symbol><symbol id="ic-circle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></symbol><symbol id="ic-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol><symbol id="ic-banknote" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="12" x="2" y="6" rx="2"/><circle cx="12" cy="12" r="2"/><path d="M6 12h.01M18 12h.01"/></symbol><symbol id="ic-fuel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6.998a2 2 0 0 0-.59-1.42L18 5"/><path d="M14 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16"/><path d="M2 21h13"/><path d="M3 9h11"/></symbol><symbol id="ic-smartphone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol><symbol id="ic-shopping-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2.05 2.05 1.099-.028a1 1 0 0 1 1.008.815l2.69 14.347A1 1 0 0 0 7.83 18H18"/><path d="M4.563 5h16.435a1 1 0 0 1 .981 1.204l-1.026 6.226A2 2 0 0 1 18.962 14H6.25"/><circle cx="18" cy="20" r="2"/><circle cx="8" cy="20" r="2"/></symbol><symbol id="ic-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></symbol><symbol id="ic-coffee" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></symbol><symbol id="ic-shopping-basket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 11-1 9"/><path d="m19 11-4-7"/><path d="M2 11h20"/><path d="m3.5 11 1.6 7.4a2 2 0 0 0 2 1.6h9.8a2 2 0 0 0 2-1.6l1.7-7.4"/><path d="M4.5 15.5h15"/><path d="m5 11 4-7"/><path d="m9 11 1 9"/></symbol><symbol id="ic-heart-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></symbol><symbol id="ic-shirt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></symbol><symbol id="ic-refresh-cw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></symbol><symbol id="ic-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></symbol><symbol id="ic-file-spreadsheet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M8 13h2"/><path d="M14 13h2"/><path d="M8 17h2"/><path d="M14 17h2"/></symbol><symbol id="ic-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol><symbol id="ic-braces" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></symbol><symbol id="ic-table" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M3 15h18"/></symbol><symbol id="ic-layout-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></symbol><symbol id="ic-list-checks" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/></symbol><symbol id="ic-square-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></symbol><symbol id="ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol><symbol id="ic-log-in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/></symbol><symbol id="ic-circle-dot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="12" r="10"/></symbol><symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol><symbol id="ic-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol><symbol id="ic-bike" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></symbol><symbol id="ic-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></symbol><symbol id="ic-house" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol><symbol id="ic-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></symbol><symbol id="ic-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol></svg>
 
 <div id="lock">
   <div class="lock-card">
@@ -504,33 +571,33 @@
 
   <section id="accounts" data-fx="52" data-cur="EGP">
     <div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-layout-dashboard"/></svg>
-      <h2>الحسابات — أصول، ديون، وإجمالي</h2>
-      <span class="hint" id="acc_hint">11 حساب · 1 مجموعة · آخر تحليل 2026-09-28 01:17:12</span>
+      <h2>Accounts — Assets, Liabilities &amp; Total</h2>
+      <span class="hint" id="acc_hint">11 accounts · 1 group · last analysis 2026-09-28 01:17:12</span>
     </div>
 
     <div class="cards">
       <div class="card">
         <span class="ci tone-green"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg></span>
         <div class="v num"><span id="nw_assets">62,057.98</span> EGP</div>
-        <div class="l">الأصول (Assets)</div>
+        <div class="l">Assets</div>
       </div>
       <div class="card">
         <span class="ci tone-red"><svg class="ic" aria-hidden="true"><use href="#ic-triangle-alert"/></svg></span>
         <div class="v num"><span id="nw_liab">0.00</span> EGP</div>
-        <div class="l">الديون (Liabilities)</div>
+        <div class="l">Liabilities</div>
       </div>
       <div class="card">
         <span class="ci tone-navy"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg></span>
         <div class="v num"><span id="nw_total">62,057.98</span> EGP</div>
-        <div class="l">الإجمالي (Total)</div>
+        <div class="l">Total</div>
       </div>
     </div>
 
     <div class="tw">
       <table id="acc_tbl">
         <thead><tr>
-          <th>الحساب</th><th class="num">الرصيد</th><th class="num">بالجنيه</th>
-          <th class="num">حركة الفترة</th><th class="num">في الإجمالي</th>
+          <th>Account</th><th class="num">Balance</th><th class="num">EGP</th>
+          <th class="num">Period Flow</th><th class="num">In Total</th>
         </tr></thead>
         <tbody id="acc_tb"><tr class="grp" data-gid="accounts" data-gon="1"><td><b><svg class="ic" aria-hidden="true"><use href="#ic-layout-dashboard"/></svg>Accounts</b></td><td class="num"></td><td class="num"><b class="g-eq">0.00</b></td><td class="num"></td><td class="num"><button type="button" class="tg on" data-tg="g:accounts" aria-pressed="true">نعم</button></td></tr>
 <tr class="acc" data-aid="cash" data-gid="accounts" data-name="Cash" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>Cash<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="cash" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="cash">تعديل</button><button type="button" class="rs" data-rs="cash" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:cash" aria-pressed="true">نعم</button></td></tr>
@@ -544,9 +611,9 @@
 <tr class="acc" data-aid="halan" data-gid="accounts" data-name="Halan" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg>Halan<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="halan" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="halan">تعديل</button><button type="button" class="rs" data-rs="halan" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:halan" aria-pressed="true">نعم</button></td></tr>
 <tr class="acc" data-aid="amera" data-gid="accounts" data-name="Amera's Lend" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-send"/></svg>Amera's Lend<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="amera" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="amera">تعديل</button><button type="button" class="rs" data-rs="amera" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:amera" aria-pressed="true">نعم</button></td></tr>
 <tr class="acc" data-aid="lend" data-gid="accounts" data-name="Lend" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-send"/></svg>Lend<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="lend" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="lend">تعديل</button><button type="button" class="rs" data-rs="lend" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:lend" aria-pressed="true">نعم</button></td></tr>
-<tr class="tot"><td>الأصول (Assets)</td><td class="num"></td><td class="num" id="nw_a2">62,057.98</td><td class="num"></td><td class="num"></td></tr>
-<tr class="tot"><td>الديون (Liabilities)</td><td class="num"></td><td class="num" id="nw_l2">0.00</td><td class="num"></td><td class="num"></td></tr>
-<tr class="tot big"><td>الإجمالي (Total)</td><td class="num"></td><td class="num" id="nw_t2">62,057.98</td><td class="num"></td><td class="num"></td></tr></tbody>
+<tr class="tot"><td>Assets</td><td class="num"></td><td class="num" id="nw_a2">62,057.98</td><td class="num"></td><td class="num"></td></tr>
+<tr class="tot"><td>Liabilities</td><td class="num"></td><td class="num" id="nw_l2">0.00</td><td class="num"></td><td class="num"></td></tr>
+<tr class="tot big"><td>Total</td><td class="num"></td><td class="num" id="nw_t2">62,057.98</td><td class="num"></td><td class="num"></td></tr></tbody>
       </table>
     </div>
 
@@ -574,42 +641,88 @@
 
   <section id="log">
     <div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-square-pen"/></svg>
-      <h2>تسجيل سريع — سحب أو وارد أو تحويل</h2>
+      <h2>Quick Log — Expense, Income or Transfer</h2>
       <span class="hint">بيحرّك رصيد الحساب فوراً</span>
     </div>
 
     <div class="seg" role="tablist">
-      <button type="button" class="seg-btn on" id="seg_out" onclick="setType('out')"><svg class="ic" aria-hidden="true"><use href="#ic-trending-down"/></svg> سحب</button>
-      <button type="button" class="seg-btn t-in" id="seg_in" onclick="setType('in')"><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg> وارد</button>
-      <button type="button" class="seg-btn t-tr" id="seg_tr" onclick="setType('tr')"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg> تحويل</button>
+      <button type="button" class="seg-btn on" id="seg_out" onclick="setType('out')"><svg class="ic" aria-hidden="true"><use href="#ic-trending-down"/></svg> Expense</button>
+      <button type="button" class="seg-btn t-in" id="seg_in" onclick="setType('in')"><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg> Income</button>
+      <button type="button" class="seg-btn t-tr" id="seg_tr" onclick="setType('tr')"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg> Transfer</button>
     </div>
 
     <div class="form">
-      <input type="date" id="lg_d" aria-label="التاريخ">
-      <input type="number" id="lg_a" placeholder="المبلغ (EGP)" inputmode="numeric" min="1" aria-label="المبلغ">
-      <select id="lg_from" aria-label="من حساب"></select>
-      <select id="lg_to" aria-label="إلى حساب"></select>
-      <input type="text" id="lg_n" placeholder="ملاحظة (بنزين / راتب...)" maxlength="40" aria-label="ملاحظة">
-      <button class="btn btn-pri" onclick="addEntry()"><svg class="ic" aria-hidden="true"><use href="#ic-plus"/></svg> إضافة</button>
+      <div class="fr">
+        <label class="fl" for="lg_d">Date</label>
+        <input type="date" id="lg_d" aria-label="Date">
+      </div>
+      <div class="fr">
+        <label class="fl" for="lg_a">Amount</label>
+        <input type="number" id="lg_a" placeholder="Amount (EGP)" inputmode="numeric" min="1" aria-label="Amount">
+      </div>
+      <div class="fr">
+        <label class="fl" for="lg_c">Category</label>
+        <button type="button" class="cat-pick is-empty" id="lg_c" data-cat=""
+                aria-haspopup="dialog" aria-label="Category"
+                onclick="openCatPicker('lg_c', TYPE)"><span class="cp-t">Select category</span></button>
+      </div>
+      <div class="fr" id="fr_from">
+        <label class="fl" for="lg_from">From Account</label>
+        <select id="lg_from" aria-label="From Account"></select>
+      </div>
+      <div class="fr" id="fr_to">
+        <label class="fl" for="lg_to">To Account</label>
+        <select id="lg_to" aria-label="To Account"></select>
+      </div>
+      <div class="fr fr-wide">
+        <label class="fl" for="lg_n">Note</label>
+        <input type="text" id="lg_n" placeholder="Note (optional)" maxlength="40" aria-label="Note">
+      </div>
+      <div class="fr fr-act">
+        <button class="btn btn-pri" onclick="addEntry()"><svg class="ic" aria-hidden="true"><use href="#ic-plus"/></svg> Add</button>
+      </div>
       <div class="lg-err" id="lg_err" hidden></div>
+    </div>
+
+    <div class="cat-ov" id="cat_sheet" hidden role="dialog" aria-modal="true" aria-label="Category">
+      <div class="cat-box">
+        <div class="cat-head">
+          <b>Category</b>
+          <span class="cat-ops">
+            <button type="button" class="cat-op" data-act="cat-add"><svg class="ic" aria-hidden="true"><use href="#ic-plus"/></svg> Add</button>
+            <button type="button" class="cat-op" data-act="cat-edit" aria-label="Edit categories" title="Edit categories"><svg class="ic" aria-hidden="true"><use href="#ic-square-pen"/></svg></button>
+            <button type="button" class="cat-op" data-act="cat-close" aria-label="Close" title="Close"><svg class="ic" aria-hidden="true"><use href="#ic-x"/></svg></button>
+          </span>
+        </div>
+        <div class="cat-grid" id="cat_grid"></div>
+        <div class="cat-new" id="cat_new" hidden>
+          <input type="text" id="cat_new_name" maxlength="24" placeholder="Category name" aria-label="Category name">
+          <select id="cat_new_icon" aria-label="Icon"></select>
+          <button type="button" class="cat-op on" data-act="cat-save">Save</button>
+          <button type="button" class="cat-op" data-act="cat-cancel">Cancel</button>
+        </div>
+        <div class="cat-foot" id="cat_foot" hidden>
+          <button type="button" class="cat-op" data-act="cat-reset">Reset to defaults</button>
+        </div>
+      </div>
     </div>
 
     <div class="stats">
       <div class="stat">
-        <div class="sl"><svg class="ic" aria-hidden="true"><use href="#ic-gauge"/></svg> مصروف الأسبوع (من السبت)</div>
+        <div class="sl"><svg class="ic" aria-hidden="true"><use href="#ic-gauge"/></svg> Week Expenses (since Sat)</div>
         <div class="sv num" id="st_wk">—</div>
         <div class="bar"><i id="bar_wk"></i></div>
       </div>
       <div class="stat">
-        <div class="sl"><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg> دخل الشهر</div>
+        <div class="sl"><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg> Month Income</div>
         <div class="sv num v-green" id="st_in">—</div>
       </div>
       <div class="stat">
-        <div class="sl"><svg class="ic" aria-hidden="true"><use href="#ic-trending-down"/></svg> مصروف الشهر</div>
+        <div class="sl"><svg class="ic" aria-hidden="true"><use href="#ic-trending-down"/></svg> Month Expenses</div>
         <div class="sv num v-red" id="st_out">—</div>
       </div>
       <div class="stat">
-        <div class="sl"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg> صافي الشهر</div>
+        <div class="sl"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg> Month Net</div>
         <div class="sv num" id="st_net">—</div>
       </div>
     </div>
@@ -618,14 +731,17 @@
 
     <div class="actions">
       <button class="btn btn-pri" onclick="copyReport()"><svg class="ic" aria-hidden="true"><use href="#ic-copy"/></svg> نسخ التقرير للمحاسبة</button>
+      <button class="btn btn-out" onclick="exportCats()"><svg class="ic" aria-hidden="true"><use href="#ic-download"/></svg> نسخ categories.json</button>
       <button class="btn btn-danger" onclick="wipeLog()"><svg class="ic" aria-hidden="true"><use href="#ic-x"/></svg> مسح السجل</button>
     </div>
 
-    <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> كل تسجيل لازم يكون مربوط بحساب — «سحب» بيخصم من الحساب
-    المختار، «وارد» بيزيد عليه، و«تحويل» ينقل فلوس من حساب لحساب من غير ما يتغير
-    إجماليك. البيانات محفوظة داخل متصفح هذا الجهاز — أول ما تيجي للمحاسب اضغط
-    «نسخ التقرير» والصقه هنا بضغطة واحدة، ولتثبيت الأرصدة في الملف استخدم
-    «نسخ accounts.json» فوق.</div>
+    <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> كل تسجيل لازم يكون مربوط بحساب وفئة — <b>Expense</b> بيخصم
+    من الحساب المختار، <b>Income</b> بيزيد عليه، و<b>Transfer</b> ينقل فلوس من حساب
+    لحساب من غير ما يتغير إجماليك. دوس على <b>Category</b> عشان تختار من الشبكة،
+    و«Add» تضيف فئة جديدة ليك، والقلم يمسح فئة. البيانات محفوظة داخل متصفح هذا
+    الجهاز — أول ما تيجي للمحاسب اضغط «نسخ التقرير» والصقه هنا بضغطة واحدة،
+    ولتثبيت الأرصدة في الملف استخدم «نسخ accounts.json» فوق.</div>
+    <script type="application/json" id="cat_cfg">{"income": [{"id": "salary", "name": "Salary", "icon": "banknote"}, {"id": "overtime", "name": "Overtime", "icon": "clock"}, {"id": "bonus", "name": "Bonus", "icon": "target"}, {"id": "transportation", "name": "Transportation", "icon": "fuel"}, {"id": "freelance", "name": "Freelance", "icon": "send"}, {"id": "profit", "name": "Profit", "icon": "trending-up"}, {"id": "other", "name": "Other", "icon": "circle-dot"}], "expense": [{"id": "food", "name": "Food", "icon": "utensils"}, {"id": "social", "name": "Social Life", "icon": "users"}, {"id": "bike", "name": "Bike", "icon": "bike"}, {"id": "transport", "name": "Transport", "icon": "car"}, {"id": "personal", "name": "Personal", "icon": "shirt"}, {"id": "home", "name": "Home", "icon": "house"}, {"id": "health", "name": "Health", "icon": "heart-pulse"}, {"id": "bills", "name": "Bills", "icon": "file-text"}, {"id": "debts", "name": "Debts", "icon": "trending-down"}, {"id": "gift", "name": "Gift", "icon": "gift"}, {"id": "groceries", "name": "Groceries", "icon": "shopping-basket"}, {"id": "shopping", "name": "Shopping", "icon": "shopping-cart"}, {"id": "subscriptions", "name": "Subscriptions", "icon": "refresh-cw"}, {"id": "other", "name": "Other", "icon": "circle-dot"}]}</script>
   </section>
 
   <section id="market"><div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg><h2>نبض السوق — Cairo</h2><span class="hint">آخر فحص: 27/09/2026 — تحديث أسبوعي</span></div><div class="mk"><div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-fuel"/></svg>بنزين 92 (رسمي)</span><b class="mk-v num">22.25 ج.م / لتر</b><span class="mk-s">محطات الوقود — 25/09/2026</span></div>
@@ -739,15 +855,238 @@ var LKEY = "mf_log_2026-09";
 var TYPE = "out";
 var EDIT = -1, EDTYPE = "out";
 
+/* ===== categories: preset lists from 03_System/categories.json, user edits in
+   localStorage "mf_cats", picker sheet with Add / delete / reset            */
+var PICK = { target: "", type: "out" }, CAT_MANAGE = false;
+var CAT_ICONS = ["circle-dot", "banknote", "wallet", "piggy-bank", "utensils",
+  "coffee", "shopping-basket", "shopping-cart", "fuel", "car", "bike",
+  "heart-pulse", "shirt", "house", "gift", "target", "clock", "users", "send",
+  "trending-up", "trending-down", "smartphone", "file-text", "refresh-cw",
+  "calendar-days", "calendar-check", "clipboard-list", "list-checks", "info",
+  "triangle-alert", "circle-alert", "circle-check", "gauge", "table",
+  "layout-dashboard"];
+
+function catSeed() {
+  var el = document.getElementById("cat_cfg");
+  if (el) {
+    try {
+      var c = JSON.parse(el.textContent);
+      if (c && Array.isArray(c.income) && Array.isArray(c.expense)) return c;
+    } catch (e) {}
+  }
+  return { income: [], expense: [] };
+}
+function catLoad() {
+  var raw = null;
+  try { raw = localStorage.getItem("mf_cats"); } catch (e) {}
+  if (raw) {
+    try {
+      var c = JSON.parse(raw);
+      if (c && Array.isArray(c.income) && Array.isArray(c.expense)) return c;
+    } catch (e) {}
+  }
+  return catSeed();
+}
+function catSave(c) { try { localStorage.setItem("mf_cats", JSON.stringify(c)); } catch (e) {} }
+function catKey(type) { return type === "in" ? "income" : "expense"; }
+function catList(type) { return catLoad()[catKey(type)] || []; }
+function catFind(type, id) {
+  var a = catList(type);
+  for (var i = 0; i < a.length; i++)
+    if (String(a[i].id) === String(id)) return a[i];
+  return null;
+}
+function catName(type, id) { var x = catFind(type, id); return x ? String(x.name) : ""; }
+function catIcon(type, id) { var x = catFind(type, id); return x && x.icon ? x.icon : "circle-dot"; }
+function catSVG(n) {
+  return '<svg class="ic" aria-hidden="true"><use href="#ic-' + escAttr(n) + '"/></svg>';
+}
+function catOptions(type, cur) {
+  var list = catList(type),
+      h = '<option value="">Select category</option>', i;
+  for (i = 0; i < list.length; i++)
+    h += '<option value="' + escAttr(list[i].id) + '"' +
+      (String(list[i].id) === String(cur || "") ? " selected" : "") + ">" +
+      escj(list[i].name) + "</option>";
+  return h;
+}
+function lastCat(type) {
+  try { return localStorage.getItem("mf_cat_last:" + type) || ""; } catch (e) { return ""; }
+}
+function rememberCat(type, id) {
+  try { localStorage.setItem("mf_cat_last:" + type, String(id || "")); } catch (e) {}
+}
+function setCatField(id, type, cat) {
+  var b = document.getElementById(id);
+  if (!b) return;
+  var nm = cat ? catName(type, cat) : "";
+  b.setAttribute("data-cat", nm ? cat : "");
+  b.classList.toggle("is-empty", !nm);
+  b.innerHTML = (nm ? catSVG(catIcon(type, cat)) : "") +
+    '<span class="cp-t">' + escj(nm || "Select category") + "</span>";
+}
+function getCatField(id) {
+  var b = document.getElementById(id);
+  return b ? (b.getAttribute("data-cat") || "") : "";
+}
+function closeCatSheet() {
+  var s = document.getElementById("cat_sheet");
+  if (s) s.hidden = true;
+  CAT_MANAGE = false;
+  var box = document.getElementById("cat_new");
+  if (box) box.hidden = true;
+  var b = document.querySelector('#cat_sheet [data-act="cat-edit"]');
+  if (b) b.classList.remove("on");
+}
+function renderCatGrid() {
+  var g = document.getElementById("cat_grid");
+  if (!g) return;
+  var list = catList(PICK.type), h = "", i;
+  var cur = PICK.target === "lg_c" ? getCatField("lg_c")
+          : (document.getElementById(PICK.target) || {}).value || "";
+  for (i = 0; i < list.length; i++) {
+    var c = list[i];
+    h += '<button type="button" class="cat-cell' +
+      (String(c.id) === String(cur) ? " on" : "") + '" data-cat="' +
+      escAttr(c.id) + '">' + catSVG(c.icon || "circle-dot") +
+      "<span>" + escj(c.name) + "</span>" +
+      (CAT_MANAGE ? '<span class="rm">' + catSVG("x") + "</span>" : "") +
+      "</button>";
+  }
+  h += '<button type="button" class="cat-cell add" data-act="cat-add">' +
+    catSVG("plus") + "<span>Add</span></button>";
+  g.innerHTML = h;
+  var f = document.getElementById("cat_foot");
+  if (f) {
+    var has = null;
+    try { has = localStorage.getItem("mf_cats"); } catch (e) {}
+    f.hidden = !has;
+  }
+}
+function openCatPicker(target, type) {
+  PICK.target = target;
+  PICK.type = type === "tr" ? (PICK.type || "out") : type;
+  CAT_MANAGE = false;
+  var s = document.getElementById("cat_sheet");
+  if (!s) return;
+  renderCatGrid();
+  s.hidden = false;
+}
+function catPick(id) {
+  if (CAT_MANAGE) {
+    var nm = catName(PICK.type, id);
+    if (!confirm('Delete the category "' + nm + '"?')) return;
+    var c = catLoad(), k = catKey(PICK.type);
+    c[k] = (c[k] || []).filter(function (x) { return String(x.id) !== String(id); });
+    catSave(c);
+    renderCatGrid();
+    return;
+  }
+  var t = document.getElementById(PICK.target);
+  if (t) {
+    if (String(t.tagName) === "SELECT") t.value = id;
+    else setCatField(PICK.target, PICK.type, id);
+    t.classList.remove("err");
+  }
+  rememberCat(PICK.type, id);
+  closeCatSheet();
+}
+function fillIconSelect() {
+  var s = document.getElementById("cat_new_icon");
+  if (!s || s.options.length) return;
+  var h = "";
+  for (var i = 0; i < CAT_ICONS.length; i++)
+    h += '<option value="' + CAT_ICONS[i] + '">' + CAT_ICONS[i] + "</option>";
+  s.innerHTML = h;
+}
+function saveNewCat() {
+  var n = document.getElementById("cat_new_name");
+  var nm = String((n && n.value) || "").trim();
+  if (!nm) { if (n) { n.classList.add("err"); n.focus(); } return; }
+  if (n) n.classList.remove("err");
+  var c = catLoad(), k = catKey(PICK.type);
+  var base = nm.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "");
+  if (base.length < 2) base = "cat";
+  var id = base.slice(0, 18), i = 2;
+  var all = (c.income || []).concat(c.expense || []);
+  function taken(x) {
+    for (var j = 0; j < all.length; j++) if (String(all[j].id) === x) return true;
+    return false;
+  }
+  while (taken(id)) { id = base.slice(0, 16) + "_" + i; i++; }
+  var ic = document.getElementById("cat_new_icon");
+  c[k] = c[k] || [];
+  c[k].push({ id: id, name: nm, icon: ic && ic.value ? ic.value : "circle-dot" });
+  catSave(c);
+  document.getElementById("cat_new").hidden = true;
+  renderCatGrid();
+}
+function catAct(cmd) {
+  var box = document.getElementById("cat_new");
+  if (cmd === "cat-close") { closeCatSheet(); return; }
+  if (cmd === "cat-add") {
+    fillIconSelect();
+    document.getElementById("cat_new_name").value = "";
+    box.hidden = false;
+    document.getElementById("cat_new_name").focus();
+    return;
+  }
+  if (cmd === "cat-cancel") { box.hidden = true; return; }
+  if (cmd === "cat-edit") {
+    CAT_MANAGE = !CAT_MANAGE;
+    box.hidden = true;
+    document.querySelector('#cat_sheet [data-act="cat-edit"]')
+      .classList.toggle("on", CAT_MANAGE);
+    renderCatGrid();
+    return;
+  }
+  if (cmd === "cat-save") { saveNewCat(); return; }
+  if (cmd === "cat-reset") {
+    if (!confirm("Reset categories to the built-in defaults?")) return;
+    try { localStorage.removeItem("mf_cats"); } catch (e) {}
+    renderCatGrid();
+  }
+}
+function exportCats() {
+  var c = catLoad();
+  var txt = JSON.stringify(c, null, 2);
+  var head = "income: " + (c.income || []).length +
+             " · expense: " + (c.expense || []).length;
+  function dl() {
+    try {
+      var blob = new Blob([txt], { type: "application/json;charset=utf-8" });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = "categories.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+      alert("اتحمّل categories.json — انقله فوق 03_System/categories.json واضغط rebuild.\n" + head);
+    } catch (e) {
+      alert("تعذّر التحميل — النص تحت:\n\n" + txt.slice(0, 1500));
+    }
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(function () {
+      alert("اتنسخ categories.json — الصقه في 03_System/categories.json واضغط rebuild.\n" + head);
+    }).catch(dl);
+  } else dl();
+}
+
 function setType(t) {
   TYPE = t;
   ["out", "in", "tr"].forEach(function (k) {
     var el = document.getElementById("seg_" + k);
     if (el) el.classList.toggle("on", t === k);
   });
-  var f = document.getElementById("lg_from"), o = document.getElementById("lg_to");
+  var f = document.getElementById("fr_from"), o = document.getElementById("fr_to");
   if (f) f.style.display = (t === "in") ? "none" : "";
   if (o) o.style.display = (t === "out") ? "none" : "";
+  var cf = document.getElementById("lg_c") ? document.getElementById("lg_c").parentNode : null;
+  if (cf) cf.style.display = (t === "tr") ? "none" : "";
+  if (t !== "tr") setCatField("lg_c", t, lastCat(t));
   lgErr("");
 }
 function localISO() {
@@ -836,7 +1175,7 @@ function accNames() {
 }
 function accOptions() {
   var names = accNames(),
-      h = '<option value="">اختار الحساب</option>', id;
+      h = '<option value="">Select account</option>', id;
   for (id in names)
     if (Object.prototype.hasOwnProperty.call(names, id))
       h += '<option value="' + escAttr(id) + '">' + escj(names[id]) + "</option>";
@@ -855,18 +1194,24 @@ function lgErr(msg, bad) {
     var el = document.getElementById(i);
     if (el) el.classList.toggle("err", !!(bad && bad.indexOf(i) >= 0));
   });
+  var cp = document.getElementById("lg_c");
+  if (cp) cp.classList.toggle("err", !!(bad && bad.indexOf("lg_c") >= 0));
 }
 function entryAccountLabel(e) {
   var nm = accNames(), a = [];
   if (e.t === "tr") {
-    if (e.f) a.push("من " + (nm[e.f] || e.f));
-    if (e.o) a.push("إلى " + (nm[e.o] || e.o));
+    if (e.f) a.push("from " + (nm[e.f] || e.f));
+    if (e.o) a.push("to " + (nm[e.o] || e.o));
   } else if (e.t === "in") {
-    if (e.o) a.push("إلى " + (nm[e.o] || e.o));
+    if (e.o) a.push("to " + (nm[e.o] || e.o));
   } else if (e.f) {
-    a.push("من " + (nm[e.f] || e.f));
+    a.push("from " + (nm[e.f] || e.f));
   }
   return a.join(" ");
+}
+function entryCatLabel(e) {
+  if (!e || e.t === "tr" || !e.c) return "";
+  return catName(e.t, e.c);
 }
 
 function totals() {
@@ -922,55 +1267,62 @@ function renderLog() {
         '<div class="li-main">' +
           '<div class="ed-f">' +
             '<input type="date" id="ed_d" value="' + String(e.d) +
-              '" aria-label="التاريخ" onkeydown="if(event.key==\'Enter\')saveEdit();if(event.key==\'Escape\')cancelEdit();">' +
+              '" aria-label="Date" onkeydown="if(event.key==\'Enter\')saveEdit();if(event.key==\'Escape\')cancelEdit();">' +
             '<input type="number" id="ed_a" value="' + e.a +
-              '" min="1" inputmode="numeric" aria-label="المبلغ" onkeydown="if(event.key==\'Enter\')saveEdit();if(event.key==\'Escape\')cancelEdit();">' +
+              '" min="1" inputmode="numeric" aria-label="Amount" onkeydown="if(event.key==\'Enter\')saveEdit();if(event.key==\'Escape\')cancelEdit();">' +
+            '<select id="ed_c" aria-label="Category">' + catOptions(e.t, e.c) + '</select>' +
             '<input type="text" id="ed_n" value="' + escAttr(e.n || "") +
-              '" maxlength="40" placeholder="ملاحظة" aria-label="ملاحظة" onkeydown="if(event.key==\'Enter\')saveEdit();if(event.key==\'Escape\')cancelEdit();">' +
-            '<select id="ed_f" aria-label="من حساب">' + opts + '</select>' +
-            '<select id="ed_o" aria-label="إلى حساب">' + opts + '</select>' +
+              '" maxlength="40" placeholder="Note" aria-label="Note" onkeydown="if(event.key==\'Enter\')saveEdit();if(event.key==\'Escape\')cancelEdit();">' +
+            '<select id="ed_f" aria-label="From Account">' + opts + '</select>' +
+            '<select id="ed_o" aria-label="To Account">' + opts + '</select>' +
           '</div>' +
           '<div class="ed-t">' +
             '<button type="button" class="ed-b' + (EDTYPE === "out" ? " on" : "") +
-              '" id="edt_out" onclick="setEdType(\'out\')">سحب</button>' +
+              '" id="edt_out" onclick="setEdType(\'out\')">Expense</button>' +
             '<button type="button" class="ed-b' + (EDTYPE === "in" ? " on" : "") +
-              '" id="edt_in" onclick="setEdType(\'in\')">وارد</button>' +
+              '" id="edt_in" onclick="setEdType(\'in\')">Income</button>' +
             '<button type="button" class="ed-b' + (EDTYPE === "tr" ? " on" : "") +
-              '" id="edt_tr" onclick="setEdType(\'tr\')">تحويل</button>' +
+              '" id="edt_tr" onclick="setEdType(\'tr\')">Transfer</button>' +
           '</div>' +
         '</div>' +
-        '<button class="del ok" onclick="saveEdit()" aria-label="حفظ التعديل" title="حفظ">' +
+        '<button class="del ok" onclick="saveEdit()" aria-label="Save" title="Save">' +
           '<svg class="ic" aria-hidden="true"><use href="#ic-circle-check"/></svg></button>' +
-        '<button class="del" onclick="cancelEdit()" aria-label="إلغاء" title="إلغاء">' +
+        '<button class="del" onclick="cancelEdit()" aria-label="Cancel" title="Cancel">' +
           '<svg class="ic" aria-hidden="true"><use href="#ic-x"/></svg></button>' +
         '</div>';
       continue;
     }
     var sub = entryAccountLabel(e);
+    var cn = entryCatLabel(e);
+    var tLbl = isTr ? "Transfer" : (isIn ? "Income" : "Expense");
     rows += '<div class="log-row">' +
       '<span class="lic ' + tone + '">' +
         '<svg class="ic" aria-hidden="true"><use href="#ic-' + icon +
         '"/></svg></span>' +
       '<div class="li-main">' +
         '<div class="li-t">' +
-          (isTr ? "تحويل" : (isIn ? "دخل" : "سحب")) + " · " + fmtDate(e.d) +
+          '<span>' + tLbl + " · " + fmtDate(e.d) + '</span>' +
+          (cn ? '<span class="li-cat">' + catSVG(catIcon(e.t, e.c)) + escj(cn) +
+                '</span>' : "") +
         '</div>' +
         (e.n ? '<div class="li-s">' + escj(e.n) + '</div>' : '') +
         (sub ? '<div class="li-s">' + escj(sub) + '</div>' : '') +
       '</div>' +
       '<span class="li-amt ' + (isTr ? "t-tr" : (isIn ? "v-green" : "v-red")) + '">' +
         (isTr ? "" : (isIn ? "+" : "-")) + e.a + ' EGP</span>' +
-      '<button class="del ed" onclick="editEntry(' + i + ')" aria-label="تعديل" title="تعديل">' +
+      '<button class="del ed" onclick="editEntry(' + i + ')" aria-label="Edit" title="Edit">' +
         '<svg class="ic" aria-hidden="true"><use href="#ic-square-pen"/></svg></button>' +
-      '<button class="del" onclick="delEntry(' + i + ')" aria-label="حذف" title="حذف">' +
+      '<button class="del" onclick="delEntry(' + i + ')" aria-label="Delete" title="Delete">' +
         '<svg class="ic" aria-hidden="true"><use href="#ic-x"/></svg></button>' +
       '</div>';
   }
   box.innerHTML = rows;
   if (ed) {
     var ef = document.getElementById("ed_f"), eo = document.getElementById("ed_o");
+    var ec = document.getElementById("ed_c");
     if (ef) ef.value = ed.f || "";
     if (eo) eo.value = ed.o || "";
+    if (ec) ec.value = ed.c || "";
     setEdType(EDTYPE);
   }
 }
@@ -979,6 +1331,7 @@ function readEntryFields() {
       f = document.getElementById("lg_from"),
       o = document.getElementById("lg_to"),
       e = { t: t };
+  if (t !== "tr") e.c = getCatField("lg_c");
   if (t !== "in") e.f = f ? f.value : "";
   if (t !== "out") e.o = o ? o.value : "";
   return e;
@@ -991,10 +1344,13 @@ function validate(e) {
     if (bad.length)
       return ["اختار الحسابين: اللي هيخرج منه واللي هيدخل عليه", bad];
     if (e.f === e.o) return ["لازم حسابين مختلفين في التحويل", bad];
-  } else if (e.t === "in") {
-    if (!e.o) return ["اختار الحساب اللي هيدخل عليه", ["lg_to"]];
-  } else if (!e.f) {
-    return ["اختار الحساب اللي هيخصم منه", ["lg_from"]];
+  } else {
+    if (e.t === "in" && !e.o)
+      return ["اختار الحساب اللي هيدخل عليه", ["lg_to"]];
+    if (e.t !== "in" && !e.f)
+      return ["اختار الحساب اللي هيخصم منه", ["lg_from"]];
+    if (!e.c)
+      return ["اختار الـ Category بتاع العملية", ["lg_c", "ed_c"]];
   }
   return null;
 }
@@ -1015,11 +1371,13 @@ function addEntry() {
   lgErr("");
   var arr = loadLog();
   var rec = { d: d, a: a, n: n, t: e.t };
+  if (e.c) rec.c = e.c;
   if (e.f) rec.f = e.f;
   if (e.o) rec.o = e.o;
   arr.push(rec);
   arr.sort(function (x, y) { return x.d < y.d ? -1 : (x.d > y.d ? 1 : 0); });
   saveLog(arr);
+  if (e.c) rememberCat(e.t, e.c);
   EDIT = -1;
   f.value = "";
   document.getElementById("lg_n").value = "";
@@ -1053,6 +1411,15 @@ function setEdType(t) {
   var lf = document.getElementById("ed_f"), lo = document.getElementById("ed_o");
   if (lf) lf.style.display = (t === "in") ? "none" : "";
   if (lo) lo.style.display = (t === "out") ? "none" : "";
+  var lc = document.getElementById("ed_c");
+  if (lc) {
+    lc.style.display = (t === "tr") ? "none" : "";
+    if (t !== "tr") {
+      var keep = lc.value;
+      lc.innerHTML = catOptions(t, keep);
+      if (!keep) lc.value = "";
+    }
+  }
 }
 function cancelEdit() {
   EDIT = -1;
@@ -1070,20 +1437,25 @@ function saveEdit() {
   if (f) f.style.borderColor = "";
   var dEl = document.getElementById("ed_d"), nEl = document.getElementById("ed_n");
   var lf = document.getElementById("ed_f"), lo = document.getElementById("ed_o");
+  var lc = document.getElementById("ed_c");
   var d = (dEl && dEl.value) || arr[EDIT].d;
   var n = nEl ? nEl.value.trim() : (arr[EDIT].n || "");
   var e = { d: d, a: a, n: n, t: EDTYPE };
+  if (EDTYPE !== "tr") e.c = lc ? lc.value : "";
   if (EDTYPE !== "in") e.f = lf ? lf.value : "";
   if (EDTYPE !== "out") e.o = lo ? lo.value : "";
   var bad = validate(e);
   if (bad) {
     if (lf) lf.classList.toggle("err", bad[1].indexOf("lg_from") >= 0);
     if (lo) lo.classList.toggle("err", bad[1].indexOf("lg_to") >= 0);
+    if (lc) lc.classList.toggle("err", bad[1].indexOf("ed_c") >= 0);
     alert(bad[0]);
     return;
   }
   if (lf) lf.classList.remove("err");
   if (lo) lo.classList.remove("err");
+  if (lc) lc.classList.remove("err");
+  if (e.c) rememberCat(EDTYPE, e.c);
   arr[EDIT] = e;
   arr.sort(function (x, y) { return x.d < y.d ? -1 : (x.d > y.d ? 1 : 0); });
   saveLog(arr);
@@ -1104,24 +1476,25 @@ function copyReport() {
   if (!T.n) { alert("لا توجد تسجيلات بعد"); return; }
   var outs = [], ins = [], trs = [];
   for (var i = 0; i < T.arr.length; i++) {
-    var e = T.arr[i], acc = entryAccountLabel(e);
+    var e = T.arr[i], acc = entryAccountLabel(e), cn = entryCatLabel(e);
     var line = "- " + fmtDate(e.d) + ": " + e.a + " EGP" +
+      (cn ? " [" + cn + "]" : "") +
       (e.n ? " (" + e.n + ")" : "") +
       (acc ? " [" + acc + "]" : "");
     if (e.t === "in") ins.push(line);
     else if (e.t === "tr") trs.push(line);
     else outs.push(line);
   }
-  var txt = "تقرير التسجيل — الشهر " + T.mpre + "\n\n";
-  if (ins.length) txt += "الدخل:\n" + ins.join("\n") + "\n\n";
-  if (outs.length) txt += "المصروفات:\n" + outs.join("\n") + "\n\n";
-  if (trs.length) txt += "تحويلات بين الحسابات:\n" + trs.join("\n") + "\n\n";
-  txt += "مصروف الأسبوع: " + Math.round(T.wk) + " من " + Math.round(CAP) +
-         " (المتبقي " + Math.round(CAP - T.wk) + ")\n" +
-         "الشهر: دخل " + Math.round(T.mIn) + " | مصروف " + Math.round(T.mOut) +
-         " | الصافي " + (T.mIn - T.mOut > 0 ? "+" : "") +
+  var txt = "Quick Log report — month " + T.mpre + "\n\n";
+  if (ins.length) txt += "Income:\n" + ins.join("\n") + "\n\n";
+  if (outs.length) txt += "Expenses:\n" + outs.join("\n") + "\n\n";
+  if (trs.length) txt += "Transfers between accounts:\n" + trs.join("\n") + "\n\n";
+  txt += "Week expenses: " + Math.round(T.wk) + " of " + Math.round(CAP) +
+         " (left " + Math.round(CAP - T.wk) + ")\n" +
+         "Month: income " + Math.round(T.mIn) + " | expenses " + Math.round(T.mOut) +
+         " | net " + (T.mIn - T.mOut > 0 ? "+" : "") +
          Math.round(T.mIn - T.mOut) + " EGP" +
-         (T.nTr ? " | تحويلات " + T.nTr + " بقيمة " + Math.round(T.mTr) + " EGP" : "");
+         (T.nTr ? " | transfers " + T.nTr + " worth " + Math.round(T.mTr) + " EGP" : "");
   function manualCopy(t) {
     var ta = document.createElement("textarea");
     ta.value = t;
@@ -1163,6 +1536,27 @@ function copyReport() {
   fillAccountSelects();
   setType(TYPE);
   renderLog();
+})();
+
+/* ===== category sheet: pick / add / delete / reset ===== */
+(function initCats() {
+  var sheet = document.getElementById("cat_sheet");
+  if (!sheet) return;
+  sheet.addEventListener("click", function (ev) {
+    if (!ev.target || !ev.target.closest) return;
+    var act = ev.target.closest("[data-act]");
+    if (act) { catAct(act.getAttribute("data-act")); return; }
+    var cell = ev.target.closest("[data-cat]");
+    if (cell && cell.getAttribute("data-cat")) {
+      catPick(cell.getAttribute("data-cat"));
+    }
+  });
+  sheet.addEventListener("mousedown", function (ev) {
+    if (ev.target === sheet) closeCatSheet();
+  });
+  document.addEventListener("keydown", function (ev) {
+    if (ev.key === "Escape" && sheet && !sheet.hidden) closeCatSheet();
+  });
 })();
 
 /* ===== accounts: assets / liabilities / total, in_total toggles, balances ===== */
@@ -1221,9 +1615,9 @@ function copyReport() {
   var FORM = null, HINT_TAIL = "";
   var FX = parseFloat(sec.getAttribute("data-fx") || "1") || 1;
   var SEED = null, SRV = {}, MV = {}, IC = {}, KIND_IC = {}, GRP_IC = {};
-  var KIND_LBL = { cash: "كاش نقد", bank: "بنك", wallet: "محفظة",
-                   exchange: "منصة تداول", asset: "ذهب / أصل", broker: "وسيط",
-                   receivable: "لغيري" };
+  var KIND_LBL = { cash: "Cash", bank: "Bank", wallet: "Wallet",
+                   exchange: "Exchange", asset: "Gold / Asset", broker: "Broker",
+                   receivable: "Receivable" };
   var KIND_ORDER = ["cash", "bank", "wallet", "exchange", "asset", "broker",
                     "receivable"];
   (function readSeed() {
@@ -1356,9 +1750,9 @@ function copyReport() {
       var accts = g.accounts || [];
       for (j = 0; j < accts.length; j++) h += accRow(accts[j], gid, gon);
     }
-    h += totRow("الأصول (Assets)", "nw_a2", "");
-    h += totRow("الديون (Liabilities)", "nw_l2", "");
-    h += totRow("الإجمالي (Total)", "nw_t2", " big");
+    h += totRow("Assets", "nw_a2", "");
+    h += totRow("Liabilities", "nw_l2", "");
+    h += totRow("Total", "nw_t2", " big");
     tb.innerHTML = h;
   }
 
@@ -1594,7 +1988,8 @@ function copyReport() {
   function updateHint() {
     var c = loadCfg(), n = 0, el = document.getElementById("acc_hint");
     for (var i = 0; i < c.groups.length; i++) n += (c.groups[i].accounts || []).length;
-    if (el) el.textContent = n + " حساب · " + c.groups.length + " مجموعة" +
+    var m = c.groups.length;
+    if (el) el.textContent = n + " accounts · " + m + " " + (m === 1 ? "group" : "groups") +
       (HINT_TAIL ? " " + HINT_TAIL : "");
   }
   function afterStruct() {
