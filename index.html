@@ -253,6 +253,60 @@
   .share-bar{width:56px; height:6px; background:#E6ECF3; border-radius:99px; overflow:hidden;}
   .share-bar i{display:block; height:100%; background:var(--blue); border-radius:99px;}
 
+  /* ---------- accounts: assets / liabilities / total ---------- */
+  .tag{
+    font-size:.65rem; font-weight:700; padding:2px 7px; border-radius:99px;
+    background:#EEF2F7; color:var(--muted); border:1px solid var(--line);
+    letter-spacing:.3px;
+  }
+  .tag.t-sms{background:var(--green-bg); color:var(--green); border-color:#CDEBDB;}
+  .cell-cat{min-width:0; flex-wrap:wrap;}
+  tr.grp td{background:#F3F6FA; border-top:2px solid var(--line);}
+  tr.grp td b{display:flex; align-items:center; gap:9px; color:var(--navy); font-size:.95rem;}
+  tr.grp td b .ic{width:17px; height:17px; color:var(--navy);}
+  tr.sub td{background:#FAFCFE; font-weight:700;}
+  tr.tot td{background:#F3F6FA; font-weight:700;}
+  tr.tot.big td{background:var(--navy); color:#fff; font-size:.97rem; border-bottom:0;}
+  tr.tot.big td.num{color:#fff;}
+  tr.off td{opacity:.42;}
+  .tg{
+    font:inherit; font-size:.76rem; font-weight:700; cursor:pointer;
+    border:1px solid var(--line); background:#fff; color:var(--muted);
+    border-radius:99px; padding:4px 12px; min-width:54px;
+    transition:background .15s ease, color .15s ease;
+  }
+  .tg.on{background:var(--green-bg); color:var(--green); border-color:#CDEBDB;}
+  .ed{
+    font:inherit; font-size:.7rem; font-weight:600; cursor:pointer;
+    border:1px dashed var(--line); background:transparent; color:var(--muted);
+    border-radius:8px; padding:2px 8px; margin-inline-start:8px;
+  }
+  .ed:hover, .ed:focus-visible{border-color:var(--navy); color:var(--navy);}
+  .in-ed{
+    width:104px; font:inherit; font-size:.85rem; text-align:center;
+    border:1px solid var(--navy); border-radius:8px; padding:4px 6px;
+    font-variant-numeric:tabular-nums; color:var(--navy); background:#fff;
+  }
+  .pick{display:grid; gap:9px; margin-top:14px;}
+  .pk{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    background:#F8FAFD; border:1px solid var(--line);
+    border-radius:12px; padding:11px 13px; font-size:.85rem;
+  }
+  .pk .pk-t{font-weight:700; color:var(--navy);}
+  .pk .pk-m{color:var(--muted); font-variant-numeric:tabular-nums;}
+  .pk .pk-r{color:var(--muted); font-size:.78rem;}
+  .pk select{
+    font:inherit; font-size:.83rem; padding:6px 9px; margin-inline-start:auto;
+    border:1px solid var(--line); border-radius:9px; background:#fff;
+    color:var(--text); max-width:190px;
+  }
+  .pick-h{
+    display:flex; align-items:center; gap:7px; font-size:.85rem;
+    font-weight:700; color:var(--navy); margin-top:4px;
+  }
+  .pick-h .ic{width:15px; height:15px; color:var(--amber);}
+
   /* ---------- downloads ---------- */
   .dl{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:10px;}
   .dl a{
@@ -281,6 +335,44 @@
   }
   footer .ic{width:14px; height:14px;}
 
+  /* ---------- bottom tab bar (mobile app style) ---------- */
+  body{padding-bottom:80px;}
+  section, .cards{scroll-margin-top:14px; scroll-margin-bottom:92px;}
+  .tabbar{
+    position:fixed; left:0; right:0; bottom:0; z-index:45;
+    display:flex; gap:2px; align-items:stretch;
+    padding:7px 8px calc(7px + env(safe-area-inset-bottom));
+    background:rgba(255,255,255,.97);
+    -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);
+    box-shadow:0 -12px 28px -22px rgba(14,42,71,.85);
+  }
+  body.locked .tabbar{display:none;}
+  .tb{
+    flex:1 1 0; min-width:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:4px;
+    padding:7px 2px; border:0; background:transparent; border-radius:13px;
+    color:var(--muted); font-family:inherit; font-size:.72rem; font-weight:600;
+    line-height:1.2; cursor:pointer; transition:background .16s ease, color .16s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .tb .ic{width:21px; height:21px;}
+  .tb .t{display:block; max-width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .tb.on{background:var(--navy); color:#fff;}
+  .tb.on .ic{color:var(--gold);}
+  .tb:active{background:#E1E8F1;}
+  .tb.on:active{background:var(--navy2);}
+  @media (min-width:700px){
+    .tabbar{
+      left:50%; right:auto; transform:translateX(-50%);
+      width:min(560px, calc(100% - 32px)); bottom:16px;
+      padding:7px; gap:4px;
+      border:1px solid var(--line); border-radius:999px;
+      box-shadow:var(--shadow);
+    }
+    .tb{font-size:.76rem; padding:8px 6px;}
+  }
+
   /* ---------- mobile ---------- */
   @media (max-width:640px){
     .hd{padding:15px 14px;}
@@ -306,6 +398,8 @@
     .share-bar{display:none;}
     .actions .btn{flex:1 1 100%;}
     .lock-card{padding:28px 20px;}
+    .tb{font-size:.66rem; gap:3px; padding:6px 1px;}
+    .tb .ic{width:19px; height:19px;}
   }
 </style>
 </head>
@@ -330,7 +424,7 @@
       <span class="logo"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg></span>
       <div>
         <h1>ibrahimsaidabdelaziz</h1>
-        <p class="sub">لوحة الثروة · 2026-09-12 — 2026-09-17</p>
+        <p class="sub">لوحة الثروة · 2026-09-21 — 2026-09-25</p>
       </div>
     </div>
     <div class="chip"><svg class="ic" aria-hidden="true"><use href="#ic-shield-check"/></svg> تحديث تلقائي من رسائل البنك</div>
@@ -339,20 +433,20 @@
 
 <div class="wrap">
 
-  <div class="cards">
+  <div class="cards" id="sum">
     <div class="card">
       <span class="ci tone-red"><svg class="ic" aria-hidden="true"><use href="#ic-trending-down"/></svg></span>
-      <div class="v num">1,290 EGP</div>
+      <div class="v num">320 EGP</div>
       <div class="l">صافي المصروف (الفترة كاملة)</div>
     </div>
     <div class="card">
       <span class="ci tone-green"><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg></span>
-      <div class="v num">10,000 EGP</div>
+      <div class="v num">1,200 EGP</div>
       <div class="l">إجمالي الوارد</div>
     </div>
     <div class="card">
       <span class="ci tone-navy"><svg class="ic" aria-hidden="true"><use href="#ic-gauge"/></svg></span>
-      <div class="v num">6,545 EGP</div>
+      <div class="v num">1,948 EGP</div>
       <div class="l">متوسط الصرف الشهري</div>
     </div>
     <div class="card">
@@ -360,7 +454,69 @@
       <div class="v num">0 EGP</div>
       <div class="l">هدف ادخار 2026-09</div>
     </div>
+    <div class="card">
+      <span class="ci tone-blue"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg></span>
+      <div class="v num"><span id="nw_card">1,057.98</span> EGP</div>
+      <div class="l">صافي الثروة (Assets ناقص Liabilities)</div>
+    </div>
   </div>
+
+  <section id="accounts" data-fx="52" data-cur="EGP">
+    <div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-layout-dashboard"/></svg>
+      <h2>الحسابات — أصول، ديون، وإجمالي</h2>
+      <span class="hint">10 حساب · 3 مجموعة · آخر تحليل 2026-09-27 23:37:20</span>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <span class="ci tone-green"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg></span>
+        <div class="v num"><span id="nw_assets">1,057.98</span> EGP</div>
+        <div class="l">الأصول (Assets)</div>
+      </div>
+      <div class="card">
+        <span class="ci tone-red"><svg class="ic" aria-hidden="true"><use href="#ic-triangle-alert"/></svg></span>
+        <div class="v num"><span id="nw_liab">0.00</span> EGP</div>
+        <div class="l">الديون (Liabilities)</div>
+      </div>
+      <div class="card">
+        <span class="ci tone-navy"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg></span>
+        <div class="v num"><span id="nw_total">1,057.98</span> EGP</div>
+        <div class="l">الإجمالي (Total)</div>
+      </div>
+    </div>
+
+    <div class="tw">
+      <table id="acc_tbl">
+        <thead><tr>
+          <th>الحساب</th><th class="num">الرصيد</th><th class="num">بالجنيه</th>
+          <th class="num">حركة الفترة</th><th class="num">في الإجمالي</th>
+        </tr></thead>
+        <tbody><tr class="grp" data-gid="cash" data-gon="1"><td><b><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>Cash</b></td><td class="num"></td><td class="num"><b class="g-eq">0.00</b></td><td class="num"></td><td class="num"><button type="button" class="tg on" data-tg="g:cash" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="nbd" data-gid="cash" data-name="NBD Bank" data-cur="EGP" data-rate="1" data-bal="1057.98" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>NBD Bank<span class="tag t-sms">SMS</span></span></td><td class="num b0"><span class="bv">1,057.98</span><button type="button" class="ed" data-ed="nbd">تعديل</button></td><td class="num eq">1,057.98</td><td class="num"><span class="v-green">+0</span> / <span class="v-red">-60</span></td><td class="num"><button type="button" class="tg on" data-tg="a:nbd" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="cib" data-gid="cash" data-name="CIB Bank" data-cur="EGP" data-rate="1" data-bal="0" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>CIB Bank<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">0.00</span><button type="button" class="ed" data-ed="cib">تعديل</button></td><td class="num eq">0.00</td><td class="num"><span class="v-green">+200</span> / <span class="v-red">-260</span></td><td class="num"><button type="button" class="tg on" data-tg="a:cib" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="mashreq" data-gid="cash" data-name="Mashreq Bank" data-cur="EGP" data-rate="1" data-bal="0" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>Mashreq Bank<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">0.00</span><button type="button" class="ed" data-ed="mashreq">تعديل</button></td><td class="num eq">0.00</td><td class="num"><span class="v-green">+1,000</span> / <span class="v-red">-0</span></td><td class="num"><button type="button" class="tg on" data-tg="a:mashreq" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="ma7fazty" data-gid="cash" data-name="محفظتي" data-cur="EGP" data-rate="1" data-bal="0" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg>محفظتي<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">0.00</span><button type="button" class="ed" data-ed="ma7fazty">تعديل</button></td><td class="num eq">0.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:ma7fazty" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="bybit" data-gid="cash" data-name="Bybit" data-cur="USD" data-rate="52" data-bal="0" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg>Bybit<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">0.00</span><button type="button" class="ed" data-ed="bybit">تعديل</button></td><td class="num eq">0.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:bybit" aria-pressed="true">نعم</button></td></tr>
+<tr class="grp" data-gid="investment" data-gon="1"><td><b><svg class="ic" aria-hidden="true"><use href="#ic-trending-up"/></svg>Investment</b></td><td class="num"></td><td class="num"><b class="g-eq">0.00</b></td><td class="num"></td><td class="num"><button type="button" class="tg on" data-tg="g:investment" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="gold" data-gid="investment" data-name="Gold" data-cur="EGP" data-rate="1" data-bal="0" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-target"/></svg>Gold<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">0.00</span><button type="button" class="ed" data-ed="gold">تعديل</button></td><td class="num eq">0.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:gold" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="thndr" data-gid="investment" data-name="Thndr" data-cur="EGP" data-rate="1" data-bal="0" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-layout-dashboard"/></svg>Thndr<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">0.00</span><button type="button" class="ed" data-ed="thndr">تعديل</button></td><td class="num eq">0.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:thndr" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="halan" data-gid="investment" data-name="Halan" data-cur="EGP" data-rate="1" data-bal="0" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg>Halan<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">0.00</span><button type="button" class="ed" data-ed="halan">تعديل</button></td><td class="num eq">0.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:halan" aria-pressed="true">نعم</button></td></tr>
+<tr class="grp" data-gid="others" data-gon="1"><td><b><svg class="ic" aria-hidden="true"><use href="#ic-send"/></svg>Others</b></td><td class="num"></td><td class="num"><b class="g-eq">0.00</b></td><td class="num"></td><td class="num"><button type="button" class="tg on" data-tg="g:others" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="amera" data-gid="others" data-name="Amera's Lend" data-cur="EGP" data-rate="1" data-bal="0" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-send"/></svg>Amera's Lend<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">0.00</span><button type="button" class="ed" data-ed="amera">تعديل</button></td><td class="num eq">0.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:amera" aria-pressed="true">نعم</button></td></tr>
+<tr class="acc" data-aid="lend" data-gid="others" data-name="Lend" data-cur="EGP" data-rate="1" data-bal="0" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-send"/></svg>Lend<span class="tag t-manual">يدوي</span></span></td><td class="num b0"><span class="bv">0.00</span><button type="button" class="ed" data-ed="lend">تعديل</button></td><td class="num eq">0.00</td><td class="num"><span class="pk-r">يدوي</span></td><td class="num"><button type="button" class="tg on" data-tg="a:lend" aria-pressed="true">نعم</button></td></tr>
+<tr class="tot"><td>الأصول (Assets)</td><td class="num"></td><td class="num" id="nw_a2">1,057.98</td><td class="num"></td><td class="num"></td></tr>
+<tr class="tot"><td>الديون (Liabilities)</td><td class="num"></td><td class="num" id="nw_l2">0.00</td><td class="num"></td><td class="num"></td></tr>
+<tr class="tot big"><td>الإجمالي (Total)</td><td class="num"></td><td class="num" id="nw_t2">1,057.98</td><td class="num"></td><td class="num"></td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> أي حساب برصيد سالب بيتحسب تلقائياً ضمن
+    <b>الديون</b>، فالإجمالي = الأصول ناقص الديون. اضغط «تعديل» لكتابة رصيدك
+    الحالي، ومفتاح «في الإجمالي» بيستبعد الحساب من الأصول والديون مع بعض.
+    التعديلات محفوظة في هذا الجهاز.</div>
+
+    <div class="pick-h"><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg>رسائل من غير اسم بنك — اختار لها الحساب</div><div class="pick"><div class="pk" data-pk="0" data-bal="2448.07"><span class="pk-t">مصروف 5.00 EGP</span><span class="pk-r">Uber Downtown EG</span><span class="pk-m">رصيد مبلّغ 2,448.07</span><span class="pk-n"></span><select aria-label="اختار الحساب"><option value="">اختار الحساب</option><option value="nbd">NBD Bank</option><option value="cib">CIB Bank</option><option value="mashreq">Mashreq Bank</option><option value="ma7fazty">محفظتي</option><option value="bybit">Bybit</option><option value="gold">Gold</option><option value="thndr">Thndr</option><option value="halan">Halan</option><option value="amera">Amera's Lend</option><option value="lend">Lend</option></select></div><div class="pk" data-pk="1" data-bal="1572.28"><span class="pk-t">مصروف 255.00 EGP</span><span class="pk-r">CHILLOUT TRUIMPH CAIRO EG</span><span class="pk-m">رصيد مبلّغ 1,572.28</span><span class="pk-n"></span><select aria-label="اختار الحساب"><option value="">اختار الحساب</option><option value="nbd">NBD Bank</option><option value="cib">CIB Bank</option><option value="mashreq">Mashreq Bank</option><option value="ma7fazty">محفظتي</option><option value="bybit">Bybit</option><option value="gold">Gold</option><option value="thndr">Thndr</option><option value="halan">Halan</option><option value="amera">Amera's Lend</option><option value="lend">Lend</option></select></div></div>
+  </section>
 
   <section id="market"><div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg><h2>نبض السوق — Cairo</h2><span class="hint">آخر فحص: 27/09/2026 — تحديث أسبوعي</span></div><div class="mk"><div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-fuel"/></svg>بنزين 92 (رسمي)</span><b class="mk-v num">22.25 ج.م / لتر</b><span class="mk-s">محطات الوقود — 25/09/2026</span></div>
 <div class="mk-i"><span class="mk-l"><svg class="ic" aria-hidden="true"><use href="#ic-fuel"/></svg>تعبئة بنزين الموتوسيكل</span><b class="mk-v num">445 ج.م (20 لتر) — كل 10–14 يوم</b><span class="mk-s">بنزين 92 × 20 لتر — 27/09/2026</span></div>
@@ -431,7 +587,7 @@
     آخر هتلاقيه فاضي. أول ما تيجي للمحاسب: اضغط «نسخ التقرير» والصقه هنا بضغطة واحدة.</div>
   </section>
 
-  <section>
+  <section id="plan">
     <div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-clipboard-list"/></svg>
       <h2>خطة 2026-09 — كل خانة بالجنيه</h2>
     </div>
@@ -452,27 +608,35 @@
     <div class="tw">
       <table>
         <thead><tr><th>التصنيف</th><th class="num">الإجمالي (EGP)</th><th class="num">الحصة</th><th class="num">المعاملات</th></tr></thead>
-        <tbody><tr><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-smartphone"/></svg>موبايل وإنترنت</span></td><td class="num">600</td><td class="num"><span class="share"><span class="share-bar"><i style="width:47%"></i></span>46.5%</span></td><td class="num">1</td></tr>
-<tr><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-utensils"/></svg>مطاعم وتوصيل</span></td><td class="num">300</td><td class="num"><span class="share"><span class="share-bar"><i style="width:23%"></i></span>23.3%</span></td><td class="num">1</td></tr>
-<tr><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>سحب نقدي (ATM)</span></td><td class="num">250</td><td class="num"><span class="share"><span class="share-bar"><i style="width:19%"></i></span>19.4%</span></td><td class="num">1</td></tr>
-<tr><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-fuel"/></svg>بنزين ووقود</span></td><td class="num">180</td><td class="num"><span class="share"><span class="share-bar"><i style="width:14%"></i></span>14.0%</span></td><td class="num">1</td></tr></tbody>
+        <tbody><tr><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-coffee"/></svg>كافيهات وترفيه</span></td><td class="num">255</td><td class="num"><span class="share"><span class="share-bar"><i style="width:80%"></i></span>79.7%</span></td><td class="num">1</td></tr>
+<tr><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg>أخرى (غير مصنف)</span></td><td class="num">60</td><td class="num"><span class="share"><span class="share-bar"><i style="width:19%"></i></span>18.8%</span></td><td class="num">1</td></tr>
+<tr><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-utensils"/></svg>مطاعم وتوصيل</span></td><td class="num">5</td><td class="num"><span class="share"><span class="share-bar"><i style="width:2%"></i></span>1.6%</span></td><td class="num">1</td></tr></tbody>
       </table>
     </div>
   </section>
 
-  <section>
+  <section id="dl">
     <div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-download"/></svg>
       <h2>تحميل تقاريري</h2>
     </div>
     <div class="dl"><a href="9a69d6447d_dashboard_2026.html" download><svg class="ic" aria-hidden="true"><use href="#ic-layout-dashboard"/></svg>لوحة التحكم التفاعلية<span class="sz">4.6 MB</span></a>
 <a href="834e3a41b4_Financial_Analysis_2026.xlsx" download><svg class="ic" aria-hidden="true"><use href="#ic-file-spreadsheet"/></svg>تقرير التحليل الكامل<span class="sz">10 KB</span></a>
-<a href="261549051a_transactions_2026.csv" download><svg class="ic" aria-hidden="true"><use href="#ic-table"/></svg>كل المعاملات (CSV)<span class="sz">1 KB</span></a>
-<a href="4bada3107c_summary_2026.json" download><svg class="ic" aria-hidden="true"><use href="#ic-braces"/></svg>الأرقام المجمعة (JSON)<span class="sz">1 KB</span></a>
+<a href="261549051a_transactions_2026.csv" download><svg class="ic" aria-hidden="true"><use href="#ic-table"/></svg>كل المعاملات (CSV)<span class="sz">0 KB</span></a>
+<a href="4bada3107c_summary_2026.json" download><svg class="ic" aria-hidden="true"><use href="#ic-braces"/></svg>الأرقام المجمعة (JSON)<span class="sz">2 KB</span></a>
 <a href="bd1665a481_market_watch.json" download><svg class="ic" aria-hidden="true"><use href="#ic-braces"/></svg>أسعار السوق والأخبار (JSON)<span class="sz">5 KB</span></a></div>
   </section>
 
 </div>
 <footer><svg class="ic" aria-hidden="true"><use href="#ic-shield-check"/></svg> بياناتك مبنية على جهازك وتُحدَّث من الرسايل الخام · تاريخ البناء 27/09/2026</footer>
+
+<nav class="tabbar" id="tabbar" aria-label="تنقل سريع بين الأقسام">
+  <button type="button" class="tb on" data-t="sum"><svg class="ic" aria-hidden="true"><use href="#ic-wallet"/></svg><span class="t">ملخص</span></button>
+  <button type="button" class="tb" data-t="accounts"><svg class="ic" aria-hidden="true"><use href="#ic-layout-dashboard"/></svg><span class="t">الحسابات</span></button>
+  <button type="button" class="tb" data-t="log"><svg class="ic" aria-hidden="true"><use href="#ic-square-pen"/></svg><span class="t">تسجيل</span></button>
+  <button type="button" class="tb" data-t="plan"><svg class="ic" aria-hidden="true"><use href="#ic-clipboard-list"/></svg><span class="t">الخطة</span></button>
+  <button type="button" class="tb" data-t="market"><svg class="ic" aria-hidden="true"><use href="#ic-refresh-cw"/></svg><span class="t">الأسعار</span></button>
+  <button type="button" class="tb" data-t="dl"><svg class="ic" aria-hidden="true"><use href="#ic-download"/></svg><span class="t">تقارير</span></button>
+</nav>
 
 <script>
 /* ===== gate: sha256 of the passcode — local check, nothing sent anywhere ===== */
@@ -761,6 +925,240 @@ function copyReport() {
   var di = document.getElementById("lg_d");
   if (di && !di.value) di.value = localISO();
   renderLog();
+})();
+
+/* ===== accounts: assets / liabilities / total, in_total toggles, balances ===== */
+(function initAccounts() {
+  var sec = document.getElementById("accounts");
+  if (!sec) return;
+  var PRE = "mf_acc_";
+  function g(k, d) {
+    var v = null;
+    try { v = localStorage.getItem(PRE + k); } catch (e) {}
+    return (v === null || v === "") ? d : v;
+  }
+  function s(k, v) { try { localStorage.setItem(PRE + k, v); } catch (e) {} }
+  function fmtB(x) {
+    return Number(x).toLocaleString("en-US",
+      { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function qs(sel, root) { return (root || sec).querySelector(sel); }
+  function all(sel) { return sec.querySelectorAll(sel); }
+  function rowById(id) { return qs('tr.acc[data-aid="' + id + '"]'); }
+
+  function balOf(tr) {
+    var ov = g("bal:" + tr.getAttribute("data-aid"), "");
+    var v = ov === "" ? parseFloat(tr.getAttribute("data-bal") || "0") : parseFloat(ov);
+    return isFinite(v) ? v : 0;
+  }
+
+  function syncToggles() {
+    var bs = all("[data-tg]");
+    for (var i = 0; i < bs.length; i++) {
+      var p = bs[i].getAttribute("data-tg").split(":");
+      var kind = p[0], id = p[1], def = "1";
+      if (kind === "a") {
+        var r = rowById(id);
+        def = r ? r.getAttribute("data-on") : "1";
+      } else {
+        var gr = qs('tr.grp[data-gid="' + id + '"]');
+        def = gr ? gr.getAttribute("data-gon") : "1";
+      }
+      var on = g((kind === "a" ? "on:" : "gon:") + id, def) === "1";
+      bs[i].classList.toggle("on", on);
+      bs[i].textContent = on ? "نعم" : "لا";
+      bs[i].setAttribute("aria-pressed", on ? "true" : "false");
+      if (kind === "g") {
+        var grow = qs('tr.grp[data-gid="' + id + '"]');
+        if (grow) grow.classList.toggle("off", !on);
+      }
+    }
+  }
+
+  function recalc() {
+    var A = 0, L = 0, gs = {};
+    var grs = all("tr.grp");
+    for (var i = 0; i < grs.length; i++) gs[grs[i].getAttribute("data-gid")] = 0;
+
+    var rs = all("tr.acc");
+    for (var k = 0; k < rs.length; k++) {
+      var tr = rs[k];
+      var gid = tr.getAttribute("data-gid");
+      var rate = parseFloat(tr.getAttribute("data-rate") || "1") || 1;
+      var id = tr.getAttribute("data-aid");
+      var on = g("on:" + id, tr.getAttribute("data-on") || "1") === "1";
+      var gon = g("gon:" + gid, "1") === "1";
+      var bal = balOf(tr);
+      var egp = bal * rate;
+      tr.classList.toggle("off", !(on && gon));
+      var bv = qs(".bv", tr); if (bv) bv.textContent = fmtB(bal);
+      var eq = qs(".eq", tr); if (eq) eq.textContent = fmtB(egp);
+      if (on && gs[gid] !== undefined) gs[gid] += egp;
+      if (on && gon) { if (egp >= 0) A += egp; else L += -egp; }
+    }
+
+    for (var j = 0; j < grs.length; j++) {
+      var gd = grs[j].getAttribute("data-gid");
+      var cell = qs(".g-eq", grs[j]);
+      if (cell) cell.textContent = fmtB(gs[gd] || 0);
+    }
+
+    var T = A - L;
+    var set = ["nw_assets", "nw_liab", "nw_total", "nw_card"];
+    var vals = { nw_assets: A, nw_liab: L, nw_total: T, nw_card: T };
+    for (var n = 0; n < set.length; n++) {
+      var el = document.getElementById(set[n]);
+      if (el) el.textContent = fmtB(vals[set[n]]);
+    }
+    ["nw_a2", "nw_l2", "nw_t2"].forEach(function (id, idx) {
+      var e2 = document.getElementById(id);
+      if (e2) e2.textContent = fmtB([A, L, T][idx]);
+    });
+  }
+
+  function startEdit(id) {
+    var tr = rowById(id);
+    var cell = tr && tr.querySelector(".b0");
+    if (!cell) return;
+    var existing = cell.querySelector(".in-ed");
+    if (existing) { existing.focus(); return; }
+    var inp = document.createElement("input");
+    inp.className = "in-ed";
+    inp.type = "number";
+    inp.step = "any";
+    inp.inputMode = "decimal";
+    inp.value = balOf(tr);
+    inp.setAttribute("aria-label", "رصيد الحساب");
+    cell.innerHTML = "";
+    cell.appendChild(inp);
+    inp.focus();
+    inp.select();
+    var done = false;
+    function finish(save) {
+      if (done) return;
+      done = true;
+      if (save) {
+        var v = parseFloat(inp.value);
+        if (isFinite(v)) s("bal:" + id, String(v));
+      }
+      cell.innerHTML = '<span class="bv"></span>' +
+        '<button type="button" class="ed" data-ed="' + id + '">تعديل</button>';
+      recalc();
+    }
+    inp.addEventListener("blur", function () { finish(true); });
+    inp.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); finish(true); }
+      else if (e.key === "Escape") { e.preventDefault(); finish(false); }
+    });
+  }
+
+  function applyPicks() {
+    var pks = all("[data-pk]");
+    for (var i = 0; i < pks.length; i++) {
+      var pk = pks[i];
+      var key = pk.getAttribute("data-pk");
+      var sel = pk.querySelector("select");
+      if (!sel) continue;
+      var saved = g("pick:" + key, "");
+      if (saved) {
+        sel.value = saved;
+        var r = rowById(saved);
+        var nm = r ? r.getAttribute("data-name") : saved;
+        var note = pk.querySelector(".pk-n");
+        if (note) note.textContent = "تم التعيين إلى " + nm;
+      }
+      sel.addEventListener("change", function () {
+        var box = this.closest("[data-pk]");
+        var k2 = box.getAttribute("data-pk");
+        var id2 = this.value;
+        s("pick:" + k2, id2);
+        var b2 = box.getAttribute("data-bal");
+        var note2 = box.querySelector(".pk-n");
+        if (id2 && b2 !== "" && isFinite(parseFloat(b2))) {
+          s("bal:" + id2, b2);
+          var r2 = rowById(id2);
+          if (note2 && r2) note2.textContent = "تم ضبط رصيد " + r2.getAttribute("data-name");
+        } else if (note2) {
+          note2.textContent = id2 ? "تم التعيين إلى " +
+            (rowById(id2) ? rowById(id2).getAttribute("data-name") : id2) : "";
+        }
+        recalc();
+      });
+    }
+  }
+
+  sec.addEventListener("click", function (e) {
+    if (!e.target.closest) return;
+    var t = e.target.closest("[data-tg]");
+    if (t) {
+      var p = t.getAttribute("data-tg").split(":");
+      var kind = p[0], id = p[1];
+      var key = (kind === "a" ? "on:" : "gon:") + id;
+      var def = "1";
+      if (kind === "a") {
+        var r = rowById(id);
+        def = r ? r.getAttribute("data-on") : "1";
+      } else {
+        var gr = qs('tr.grp[data-gid="' + id + '"]');
+        def = gr ? gr.getAttribute("data-gon") : "1";
+      }
+      s(key, g(key, def) === "1" ? "0" : "1");
+      syncToggles();
+      recalc();
+      return;
+    }
+    var ed = e.target.closest("[data-ed]");
+    if (ed) startEdit(ed.getAttribute("data-ed"));
+  });
+
+  syncToggles();
+  applyPicks();
+  recalc();
+})();
+
+/* ===== bottom tab bar: tap to jump, highlight the visible section ===== */
+(function initTabs() {
+  var bar = document.getElementById("tabbar");
+  if (!bar) return;
+  var tabs = bar.querySelectorAll(".tb");
+  function setActive(id) {
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].classList.toggle("on", tabs[i].getAttribute("data-t") === id);
+    }
+  }
+  /* smooth jump with an instant fallback, so a tap always lands on the section */
+  function jumpTo(el) {
+    var top = Math.round(el.getBoundingClientRect().top + window.pageYOffset - 14);
+    if (top < 0) top = 0;
+    var lazy = document.visibilityState === "hidden" ||
+      (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    if (lazy) { window.scrollTo(0, top); return; }
+    try { el.scrollIntoView({ behavior: "smooth", block: "start" }); }
+    catch (e) { window.scrollTo(0, top); }
+    setTimeout(function () {
+      if (Math.abs(window.pageYOffset - top) > 100) window.scrollTo(0, top);
+    }, 1000);
+  }
+  for (var t = 0; t < tabs.length; t++) {
+    tabs[t].addEventListener("click", function () {
+      var id = this.getAttribute("data-t");
+      var el = document.getElementById(id);
+      if (!el) return;
+      setActive(id);
+      jumpTo(el);
+    });
+  }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      for (var j = 0; j < entries.length; j++) {
+        if (entries[j].isIntersecting) setActive(entries[j].target.id);
+      }
+    }, { rootMargin: "-40% 0px -50% 0px" });
+    for (var k = 0; k < tabs.length; k++) {
+      var sec = document.getElementById(tabs[k].getAttribute("data-t"));
+      if (sec) io.observe(sec);
+    }
+  }
 })();
 </script>
 </body>
