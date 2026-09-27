@@ -316,6 +316,18 @@
   }
   .rs:hover, .rs:focus-visible{border-color:var(--amber); color:var(--amber);}
   .rs[hidden]{display:none;}
+  td[data-ea], td[data-eg]{cursor:pointer;}
+  td[data-ea]:hover .cell-cat, tr.grp td[data-eg]:hover b{color:var(--navy);}
+  tr.grp td[data-eg]{color:var(--navy);}
+  tr.grp td[data-eg]:hover .ed{border-color:var(--navy); color:var(--navy);}
+  tr.frm > td{
+    background:#F8FAFD; border-top:1px dashed var(--line);
+    border-bottom:1px dashed var(--line); padding:12px;
+  }
+  tr.frm .ed-f{margin-bottom:0; align-items:center;}
+  .ed-b.dg{border-color:#F0C9C9; color:var(--red);}
+  .ed-b.dg:hover, .ed-b.dg:focus-visible{background:var(--red-bg); border-color:var(--red);}
+  .ed-f input.err, .ed-f select.err{border-color:var(--red);}
   .pick{display:grid; gap:9px; margin-top:14px;}
   .pk{
     display:flex; align-items:center; gap:10px; flex-wrap:wrap;
@@ -493,7 +505,7 @@
   <section id="accounts" data-fx="52" data-cur="EGP">
     <div class="sec-h"><svg class="ic" aria-hidden="true"><use href="#ic-layout-dashboard"/></svg>
       <h2>الحسابات — أصول، ديون، وإجمالي</h2>
-      <span class="hint">10 حساب · 3 مجموعة · آخر تحليل 2026-09-27 23:37:20</span>
+      <span class="hint" id="acc_hint">10 حساب · 3 مجموعة · آخر تحليل 2026-09-27 23:37:20</span>
     </div>
 
     <div class="cards">
@@ -520,7 +532,7 @@
           <th>الحساب</th><th class="num">الرصيد</th><th class="num">بالجنيه</th>
           <th class="num">حركة الفترة</th><th class="num">في الإجمالي</th>
         </tr></thead>
-        <tbody><tr class="grp" data-gid="cash" data-gon="1"><td><b><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>Cash</b></td><td class="num"></td><td class="num"><b class="g-eq">0.00</b></td><td class="num"></td><td class="num"><button type="button" class="tg on" data-tg="g:cash" aria-pressed="true">نعم</button></td></tr>
+        <tbody id="acc_tb"><tr class="grp" data-gid="cash" data-gon="1"><td><b><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>Cash</b></td><td class="num"></td><td class="num"><b class="g-eq">0.00</b></td><td class="num"></td><td class="num"><button type="button" class="tg on" data-tg="g:cash" aria-pressed="true">نعم</button></td></tr>
 <tr class="acc" data-aid="nbd" data-gid="cash" data-name="NBD Bank" data-cur="EGP" data-rate="1" data-bal="1057.98" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>NBD Bank<span class="tag t-sms">SMS</span></span></td><td class="num b0" data-ed="nbd" title="اضغط لكتابة الرصيد"><span class="bv">1,057.98</span><button type="button" class="ed" data-ed="nbd">تعديل</button><button type="button" class="rs" data-rs="nbd" hidden>إرجاع</button></td><td class="num eq">1,057.98</td><td class="num"><span class="v-green">+0</span> / <span class="v-red">-60</span></td><td class="num"><button type="button" class="tg on" data-tg="a:nbd" aria-pressed="true">نعم</button></td></tr>
 <tr class="acc" data-aid="cib" data-gid="cash" data-name="CIB Bank" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>CIB Bank<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="cib" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="cib">تعديل</button><button type="button" class="rs" data-rs="cib" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="v-green">+200</span> / <span class="v-red">-260</span></td><td class="num"><button type="button" class="tg on" data-tg="a:cib" aria-pressed="true">نعم</button></td></tr>
 <tr class="acc" data-aid="mashreq" data-gid="cash" data-name="Mashreq Bank" data-cur="EGP" data-rate="1" data-bal="1000" data-on="1"><td><span class="cell-cat"><svg class="ic" aria-hidden="true"><use href="#ic-banknote"/></svg>Mashreq Bank<span class="tag t-manual">يدوي</span></span></td><td class="num b0" data-ed="mashreq" title="اضغط لكتابة الرصيد"><span class="bv">1,000.00</span><button type="button" class="ed" data-ed="mashreq">تعديل</button><button type="button" class="rs" data-rs="mashreq" hidden>إرجاع</button></td><td class="num eq">1,000.00</td><td class="num"><span class="v-green">+1,000</span> / <span class="v-red">-0</span></td><td class="num"><button type="button" class="tg on" data-tg="a:mashreq" aria-pressed="true">نعم</button></td></tr>
@@ -540,19 +552,22 @@
     </div>
 
     <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> أي حساب برصيد سالب بيتحسب تلقائياً ضمن
-    <b>الديون</b>، فالإجمالي = الأصول ناقص الديون. اضغط على أي رصيد أو على
-    «تعديل» لكتابته بيدك، وبعدها بيظهر «إرجاع» يرجّعه لقيمة الملف. ومفتاح
-    «في الإجمالي» بيستبعد الحساب من الأصول والديون مع بعض.</div>
+    <b>الديون</b>، فالإجمالي = الأصول ناقص الديون. دوس على أي رصيد واكتب رقمك
+    (وبعدها بيظهر «إرجاع»)، ودوس على <b>اسم</b> أي حساب عشان تغيّر اسمه أو
+    عملته أو نوعه أو تنقله لمجموعة تانية أو تمسحه، ودوس على <b>اسم المجموعة</b>
+    عشان تغيّر اسمها أو تضيف ليها حساب أو تمسحها. مفتاح «في الإجمالي» بيستبعد
+    الصف من الأصول والديون مع بعض.</div>
 
     <div class="actions">
+      <button type="button" class="btn btn-out" data-act="grp-new"><svg class="ic" aria-hidden="true"><use href="#ic-plus"/></svg> مجموعة جديدة</button>
       <button class="btn btn-pri" onclick="exportCfg()"><svg class="ic" aria-hidden="true"><use href="#ic-download"/></svg> نسخ accounts.json</button>
       <button class="btn btn-danger" onclick="clearLocal()"><svg class="ic" aria-hidden="true"><use href="#ic-x"/></svg> مسح التعديلات المحفوظة</button>
     </div>
 
-    <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> الأرصدة والتعديلات محفوظة في متصفح الجهاز ده بس.
-    «نسخ accounts.json» بيديك نسخة كاملة بالأرقام الحالية (وبيرجّع كل حساب
-    عدّلته بيه لـ source: manual عشان الـ SMS ما يرجّعوش) — الصقها مكان
-    <b>03_System/accounts.json</b> واضغط rebuild عشان تثبت على الموقع.</div>
+    <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> كل اللي تغيّره هنا (أسماء، أنواع، عمليات، حسابات
+    جديدة) متحفظ في المتصفح ده بس — «نسخ accounts.json» بيطلعه لك جاهز، الصقه
+    مكان <b>03_System/accounts.json</b> واضغط rebuild عشان يثبت على الموقع.
+    الحسابات الـ SMS بتفضل مصدرها الرسائل لحد ما تعدّل رصيدها بيدك.</div>
 
     <div class="pick-h"><svg class="ic" aria-hidden="true"><use href="#ic-circle-alert"/></svg>رسائل من غير اسم بنك — اختار لها الحساب</div><div class="pick"><div class="pk" data-pk="0" data-bal="2448.07"><span class="pk-t">مصروف 5.00 EGP</span><span class="pk-r">Uber Downtown EG</span><span class="pk-m">رصيد مبلّغ 2,448.07</span><span class="pk-n"></span><select aria-label="اختار الحساب"><option value="">اختار الحساب</option><option value="nbd">NBD Bank</option><option value="cib">CIB Bank</option><option value="mashreq">Mashreq Bank</option><option value="ma7fazty">محفظتي</option><option value="bybit">Bybit</option><option value="gold">Gold</option><option value="thndr">Thndr</option><option value="halan">Halan</option><option value="amera">Amera's Lend</option><option value="lend">Lend</option></select></div><div class="pk" data-pk="1" data-bal="1572.28"><span class="pk-t">مصروف 255.00 EGP</span><span class="pk-r">CHILLOUT TRUIMPH CAIRO EG</span><span class="pk-m">رصيد مبلّغ 1,572.28</span><span class="pk-n"></span><select aria-label="اختار الحساب"><option value="">اختار الحساب</option><option value="nbd">NBD Bank</option><option value="cib">CIB Bank</option><option value="mashreq">Mashreq Bank</option><option value="ma7fazty">محفظتي</option><option value="bybit">Bybit</option><option value="gold">Gold</option><option value="thndr">Thndr</option><option value="halan">Halan</option><option value="amera">Amera's Lend</option><option value="lend">Lend</option></select></div></div>
     <script type="application/json" id="acc_cfg">{"version": 1, "comment": "بنية الحسابات: مجموعات -> حسابات. in_total يتحكم هل يدخل الحساب/المجموعة في الـ Total. source: sms = الرصيد بييجي من رسائل البنك، manual = تكتبه بنفسك.", "fx": {"usd_egp": 52.0}, "default_sms_account": "cib", "groups": [{"id": "cash", "name": "Cash", "in_total": true, "accounts": [{"id": "nbd", "name": "NBD Bank", "currency": "EGP", "kind": "bank", "source": "sms", "in_total": true, "balance": 1000}, {"id": "cib", "name": "CIB Bank", "currency": "EGP", "kind": "bank", "source": "sms", "in_total": true, "balance": 1000}, {"id": "mashreq", "name": "Mashreq Bank", "currency": "EGP", "kind": "bank", "source": "sms", "in_total": true, "balance": 1000}, {"id": "ma7fazty", "name": "محفظتي", "currency": "EGP", "kind": "wallet", "source": "manual", "in_total": true, "balance": 1000}, {"id": "bybit", "name": "Bybit", "currency": "USD", "kind": "exchange", "source": "manual", "in_total": true, "balance": 1000}]}, {"id": "investment", "name": "Investment", "in_total": true, "accounts": [{"id": "gold", "name": "Gold", "currency": "EGP", "kind": "asset", "source": "manual", "in_total": true, "balance": 1000}, {"id": "thndr", "name": "Thndr", "currency": "EGP", "kind": "broker", "source": "manual", "in_total": true, "balance": 1000}, {"id": "halan", "name": "Halan", "currency": "EGP", "kind": "wallet", "source": "manual", "in_total": true, "balance": 1000}]}, {"id": "others", "name": "Others", "in_total": true, "accounts": [{"id": "amera", "name": "Amera's Lend", "currency": "EGP", "kind": "receivable", "source": "manual", "in_total": true, "balance": 1000}, {"id": "lend", "name": "Lend", "currency": "EGP", "kind": "receivable", "source": "manual", "in_total": true, "balance": 1000}]}]}</script>
@@ -1157,7 +1172,8 @@ function copyReport() {
   if (!sec) return;
   var PRE = "mf_acc_";
   window.mfRecalc = recalc;
-  window.mfRefresh = function () { syncToggles(); recalc(); };
+  window.mfCfg = loadCfg;
+  window.mfRefresh = function () { renderAcc(); syncToggles(); recalc(); };
   function g(k, d) {
     var v = null;
     try { v = localStorage.getItem(PRE + k); } catch (e) {}
@@ -1201,6 +1217,403 @@ function copyReport() {
       }
     } catch (e) {}
   })();
+
+  /* ---- structure: the tbody is rebuilt from accounts.json + local edits ---- */
+  var FORM = null, HINT_TAIL = "";
+  var FX = parseFloat(sec.getAttribute("data-fx") || "1") || 1;
+  var SEED = null, SRV = {}, MV = {}, IC = {}, KIND_IC = {}, GRP_IC = {};
+  var KIND_LBL = { bank: "بنك", wallet: "محفظة", exchange: "منصة تداول",
+                   asset: "ذهب / أصل", broker: "وسيط", receivable: "لغيري" };
+  var KIND_ORDER = ["bank", "wallet", "exchange", "asset", "broker", "receivable"];
+  (function readSeed() {
+    var el = document.getElementById("acc_cfg");
+    if (el) { try { var c = JSON.parse(el.textContent); if (c && c.groups) SEED = c; } catch (e) {} }
+    var he = document.getElementById("acc_hint");
+    if (he) {
+      var p = he.textContent.split("·");
+      if (p.length > 2) HINT_TAIL = "·" + p.slice(2).join("·");
+    }
+  })();
+
+  function findAcc(c, id) {
+    for (var i = 0; i < c.groups.length; i++) {
+      var g = c.groups[i], accts = g.accounts || [];
+      for (var j = 0; j < accts.length; j++)
+        if (String(accts[j].id) === String(id))
+          return { g: g, a: accts[j], gi: i, aj: j, gid: String(g.id) };
+    }
+    return null;
+  }
+  function findGrp(c, gid) {
+    for (var i = 0; i < c.groups.length; i++)
+      if (String(c.groups[i].id) === String(gid))
+        return { g: c.groups[i], gi: i };
+    return null;
+  }
+  function loadCfg() {
+    var raw = null;
+    try { raw = localStorage.getItem(PRE + "cfg"); } catch (e) {}
+    if (raw) { try { var c = JSON.parse(raw); if (c && c.groups) return c; } catch (e) {} }
+    if (SEED) return JSON.parse(JSON.stringify(SEED));
+    return { groups: [] };
+  }
+  function saveCfg(c) { try { localStorage.setItem(PRE + "cfg", JSON.stringify(c)); } catch (e) {} }
+
+  /* remember what the server rendered, so a re-render never loses SMS balances,
+     the movement column or the icons */
+  function captureServer() {
+    var rows = document.querySelectorAll("#acc_tb tr.acc"), i, tr, id, b, u, ic;
+    for (i = 0; i < rows.length; i++) {
+      tr = rows[i];
+      id = tr.getAttribute("data-aid");
+      b = parseFloat(tr.getAttribute("data-bal"));
+      if (isFinite(b)) SRV[id] = b;
+      if (tr.children[3]) MV[id] = tr.children[3].innerHTML;
+      u = tr.querySelector(".cell-cat use");
+      if (u) {
+        ic = String(u.getAttribute("href") || "").replace("#ic-", "");
+        IC[id] = ic;
+        var f = SEED ? findAcc(SEED, id) : null;
+        if (f && f.a.kind && !KIND_IC[String(f.a.kind)]) KIND_IC[String(f.a.kind)] = ic;
+      }
+    }
+    var grs = document.querySelectorAll("#acc_tb tr.grp");
+    for (i = 0; i < grs.length; i++) {
+      var gu = grs[i].querySelector("use");
+      if (gu) GRP_IC[grs[i].getAttribute("data-gid")] =
+        String(gu.getAttribute("href") || "").replace("#ic-", "");
+    }
+  }
+
+  function svgT(n) {
+    return '<svg class="ic" aria-hidden="true"><use href="#ic-' + escAttr(n) + '"/></svg>';
+  }
+  function grpRow(g, gon) {
+    var gid = String(g.id || "");
+    return '<tr class="grp" data-gid="' + escAttr(gid) + '" data-gon="' +
+      (gon ? "1" : "0") + '">' +
+      '<td data-eg="' + escAttr(gid) + '" title="اضغط لتعديل المجموعة"><b>' +
+        svgT(GRP_IC[gid] || "circle-dot") + escj(g.name || gid) + '</b>' +
+        '<button type="button" class="ed" data-eg="' + escAttr(gid) +
+        '">تعديل</button></td>' +
+      '<td class="num"></td>' +
+      '<td class="num"><b class="g-eq">0.00</b></td>' +
+      '<td class="num"></td>' +
+      '<td class="num"><button type="button" class="tg' + (gon ? " on" : "") +
+        '" data-tg="g:' + escAttr(gid) + '" aria-pressed="' +
+        (gon ? "true" : "false") + '">' + (gon ? "نعم" : "لا") +
+        '</button></td></tr>';
+  }
+  function accRow(a, gid, gon) {
+    var aid = String(a.id || "");
+    var code = String(a.currency || "EGP").toUpperCase();
+    var rate = code === "USD" ? FX : 1;
+    var bal = (SRV[aid] !== undefined && isFinite(SRV[aid])) ? SRV[aid]
+      : (isFinite(parseFloat(a.balance)) ? parseFloat(a.balance) : 0);
+    var on = a.in_total !== false;
+    var src = a.source === "sms" ? "sms" : "manual";
+    var kind = String(a.kind || "");
+    var mv = MV[aid] !== undefined ? MV[aid] : '<span class="pk-r">يدوي</span>';
+    return '<tr class="acc' + (on && gon ? "" : " off") + '" data-aid="' +
+      escAttr(aid) + '" data-gid="' + escAttr(gid) + '" data-name="' +
+      escAttr(a.name || aid) + '" data-cur="' + escAttr(code) + '" data-rate="' +
+      rate + '" data-bal="' + bal + '" data-on="' + (on ? "1" : "0") + '">' +
+      '<td data-ea="' + escAttr(aid) + '" title="اضغط لتعديل الحساب">' +
+        '<span class="cell-cat">' +
+        svgT(KIND_IC[kind] || IC[aid] || "circle-dot") + escj(a.name || aid) +
+        '<span class="tag t-' + src + '">' + (src === "sms" ? "SMS" : "يدوي") +
+        '</span></span>' +
+        '<button type="button" class="ed" data-ea="' + escAttr(aid) +
+        '">تعديل</button></td>' +
+      '<td class="num b0" data-ed="' + escAttr(aid) +
+        '" title="اضغط لكتابة الرصيد"><span class="bv">0.00</span>' +
+        '<button type="button" class="ed" data-ed="' + escAttr(aid) +
+        '">تعديل</button>' +
+        '<button type="button" class="rs" data-rs="' + escAttr(aid) +
+        '" hidden>إرجاع</button></td>' +
+      '<td class="num eq">0.00</td>' +
+      '<td class="num">' + mv + '</td>' +
+      '<td class="num"><button type="button" class="tg' + (on ? " on" : "") +
+        '" data-tg="a:' + escAttr(aid) + '" aria-pressed="' +
+        (on ? "true" : "false") + '">' + (on ? "نعم" : "لا") +
+        '</button></td></tr>';
+  }
+  function totRow(label, id, cls) {
+    return '<tr class="tot' + cls + '"><td>' + label + '</td>' +
+      '<td class="num"></td><td class="num" id="' + id + '">0.00</td>' +
+      '<td class="num"></td><td class="num"></td></tr>';
+  }
+  function renderAcc() {
+    closeForms();
+    var tb = document.getElementById("acc_tb");
+    if (!tb || !SEED) return;
+    var c = loadCfg(), h = "", i, j;
+    for (i = 0; i < c.groups.length; i++) {
+      var g = c.groups[i], gid = String(g.id || "");
+      var gon = g.in_total !== false;
+      h += grpRow(g, gon);
+      var accts = g.accounts || [];
+      for (j = 0; j < accts.length; j++) h += accRow(accts[j], gid, gon);
+    }
+    h += totRow("الأصول (Assets)", "nw_a2", "");
+    h += totRow("الديون (Liabilities)", "nw_l2", "");
+    h += totRow("الإجمالي (Total)", "nw_t2", " big");
+    tb.innerHTML = h;
+  }
+
+  /* ---- inline edit forms ---- */
+  function removeFormRows() {
+    var rows = sec.querySelectorAll("tr.frm");
+    for (var i = 0; i < rows.length; i++)
+      if (rows[i].parentNode) rows[i].parentNode.removeChild(rows[i]);
+  }
+  /* drop the state AND the row — used when the form is simply dismissed */
+  function closeForms() {
+    FORM = null;
+    removeFormRows();
+  }
+  /* the caller has just set FORM; only swap the row, never the state */
+  function insertForm(anchor, html, kind, before) {
+    if (!anchor) return null;
+    removeFormRows();
+    var tr = document.createElement("tr");
+    tr.className = "frm";
+    tr.setAttribute("data-kind", kind);
+    tr.innerHTML = '<td colspan="5">' + html + '</td>';
+    anchor.parentNode.insertBefore(tr, before ? anchor : anchor.nextSibling);
+    return tr;
+  }
+  function selHTML(pairs, cur) {
+    var h = "";
+    for (var i = 0; i < pairs.length; i++)
+      h += '<option value="' + escAttr(pairs[i][0]) + '"' +
+        (String(pairs[i][0]) === String(cur) ? " selected" : "") + '>' +
+        escj(pairs[i][1]) + '</option>';
+    return h;
+  }
+  function groupPairs(c) {
+    var r = [];
+    for (var i = 0; i < c.groups.length; i++)
+      r.push([String(c.groups[i].id), String(c.groups[i].name || c.groups[i].id)]);
+    return r;
+  }
+  function kindPairs(c) {
+    var seen = {}, r = [], i, j, kd;
+    for (i = 0; i < KIND_ORDER.length; i++) if (KIND_IC[KIND_ORDER[i]]) seen[KIND_ORDER[i]] = 1;
+    for (kd in KIND_IC) if (KIND_IC.hasOwnProperty(kd) && !seen[kd]) seen[kd] = 1;
+    for (i = 0; i < c.groups.length; i++) {
+      var accts = c.groups[i].accounts || [];
+      for (j = 0; j < accts.length; j++) {
+        kd = String(accts[j].kind || "");
+        if (kd && !seen[kd]) seen[kd] = 1;
+      }
+    }
+    for (i = 0; i < KIND_ORDER.length; i++)
+      if (seen[KIND_ORDER[i]]) r.push([KIND_ORDER[i], KIND_LBL[KIND_ORDER[i]] || KIND_ORDER[i]]);
+    for (kd in seen)
+      if (seen.hasOwnProperty(kd) && KIND_ORDER.indexOf(kd) < 0)
+        r.push([kd, KIND_LBL[kd] || kd]);
+    return r;
+  }
+  function grpRowEl(gid) {
+    var rs = all("tr.grp");
+    for (var i = 0; i < rs.length; i++)
+      if (rs[i].getAttribute("data-gid") === String(gid)) return rs[i];
+    return null;
+  }
+  function openAccForm(gid, aid) {
+    var c = loadCfg(), isNew = !aid, a;
+    if (isNew) {
+      a = { name: "", currency: "EGP", kind: "bank" };
+    } else {
+      var f = findAcc(c, aid);
+      if (!f) return;
+      a = f.a;
+      gid = f.gid;
+    }
+    FORM = { kind: "acc", isNew: isNew, gid: gid, aid: aid };
+    var html = '<div class="ed-f">' +
+      '<input id="af_n" maxlength="30" placeholder="اسم الحساب" ' +
+        'aria-label="اسم الحساب" value="' + escAttr(isNew ? "" : (a.name || aid)) + '">' +
+      '<select id="af_c" aria-label="العملة">' +
+        selHTML([["EGP", "EGP"], ["USD", "USD"]], a.currency || "EGP") + '</select>' +
+      '<select id="af_k" aria-label="النوع">' +
+        selHTML(kindPairs(c), a.kind || "bank") + '</select>' +
+      '<select id="af_g" aria-label="المجموعة">' +
+        selHTML(groupPairs(c), gid) + '</select>' +
+      (isNew ? '<input id="af_b" type="number" step="any" inputmode="decimal" ' +
+                'placeholder="الرصيد الافتتاحي" aria-label="الرصيد الافتتاحي">' : '') +
+      '<button type="button" class="ed-b" data-act="acc-save">حفظ</button>' +
+      (isNew ? "" : '<button type="button" class="ed-b dg" data-act="acc-del">حذف</button>') +
+      '<button type="button" class="ed-b" data-act="form-close">إلغاء</button>' +
+      '</div>';
+    var anchor = isNew ? grpRowEl(gid) : rowById(aid);
+    insertForm(anchor, html, "acc");
+    var n = document.getElementById("af_n");
+    if (n) n.focus();
+  }
+  function openGrpForm(gid) {
+    var c = loadCfg(), isNew = !gid, name = gid;
+    if (!isNew) { var f = findGrp(c, gid); if (!f) return; name = f.g.name || gid; }
+    FORM = { kind: "grp", isNew: isNew, gid: gid };
+    var html = '<div class="ed-f">' +
+      '<input id="gf_n" maxlength="30" placeholder="اسم المجموعة" ' +
+        'aria-label="اسم المجموعة" value="' + escAttr(isNew ? "" : name) + '">' +
+      '<button type="button" class="ed-b" data-act="grp-save">حفظ</button>' +
+      (isNew ? "" :
+        '<button type="button" class="ed-b" data-act="acc-new">+ حساب</button>' +
+        '<button type="button" class="ed-b dg" data-act="grp-del">حذف المجموعة</button>') +
+      '<button type="button" class="ed-b" data-act="form-close">إلغاء</button>' +
+      '</div>';
+    var anchor, before = false;
+    if (isNew) {
+      anchor = document.querySelector("#acc_tb tr.tot");
+      before = true;
+    } else anchor = grpRowEl(gid);
+    insertForm(anchor, html, "grp", before);
+    var n = document.getElementById("gf_n");
+    if (n) n.focus();
+  }
+  function mkId(c, name) {
+    var base = String(name).toLowerCase().replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "");
+    if (base.length < 2) base = "acc";
+    var id = base.slice(0, 18), i = 2;
+    while (findAcc(c, id)) { id = base.slice(0, 16) + "_" + i; i++; }
+    return id;
+  }
+  function mkGrpId(c, name) {
+    var base = String(name).toLowerCase().replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "");
+    if (base.length < 2) base = "grp";
+    var id = base.slice(0, 18), i = 2;
+    while (findGrp(c, id)) { id = base.slice(0, 16) + "_" + i; i++; }
+    return id;
+  }
+  function valOf(id) {
+    var el = document.getElementById(id);
+    return el ? String(el.value || "") : "";
+  }
+  function need(el) {
+    if (!el) return true;
+    if (String(el.value || "").trim()) { el.classList.remove("err"); return true; }
+    el.classList.add("err");
+    el.focus();
+    return false;
+  }
+  function saveAcc() {
+    if (!FORM) return;
+    if (!need(document.getElementById("af_n"))) return;
+    var n = valOf("af_n").trim(),
+        cur = (valOf("af_c") || "EGP").toUpperCase(),
+        kind = valOf("af_k") || "bank",
+        gid = valOf("af_g");
+    var c = loadCfg();
+    if (FORM.isNew) {
+      var tg = findGrp(c, gid);
+      if (!tg) return;
+      var b0 = parseFloat(valOf("af_b"));
+      tg.g.accounts = tg.g.accounts || [];
+      tg.g.accounts.push({ id: mkId(c, n), name: n, currency: cur, kind: kind,
+                           source: "manual", in_total: true,
+                           balance: isFinite(b0) ? b0 : 0 });
+      saveCfg(c);
+    } else {
+      var f = findAcc(c, FORM.aid);
+      if (!f) { closeForms(); return; }
+      f.a.name = n;
+      f.a.currency = cur;
+      f.a.kind = kind;
+      if (gid !== f.gid) {
+        var dst = findGrp(c, gid);
+        if (dst) {
+          f.g.accounts.splice(f.aj, 1);
+          dst.g.accounts = dst.g.accounts || [];
+          dst.g.accounts.push(f.a);
+        }
+      }
+      saveCfg(c);
+    }
+    closeForms();
+    afterStruct();
+  }
+  function delAcc() {
+    if (!FORM || FORM.isNew) { closeForms(); return; }
+    var c = loadCfg(), f = findAcc(c, FORM.aid);
+    if (!f) { closeForms(); return; }
+    if (!confirm("تمسح الحساب «" + (f.a.name || FORM.aid) + "» من الجدول؟")) return;
+    f.g.accounts.splice(f.aj, 1);
+    try { localStorage.removeItem(PRE + "base:" + FORM.aid); } catch (e) {}
+    saveCfg(c);
+    closeForms();
+    afterStruct();
+  }
+  function saveGrp() {
+    if (!FORM) return;
+    if (!need(document.getElementById("gf_n"))) return;
+    var n = valOf("gf_n").trim(), c = loadCfg();
+    if (FORM.isNew) {
+      var id = mkGrpId(c, n);
+      c.groups = c.groups || [];
+      c.groups.push({ id: id, name: n, in_total: true, accounts: [] });
+      saveCfg(c);
+      closeForms();
+      afterStruct();
+      openGrpForm(id);
+      return;
+    }
+    var f = findGrp(c, FORM.gid);
+    if (!f) { closeForms(); return; }
+    f.g.name = n;
+    saveCfg(c);
+    closeForms();
+    afterStruct();
+  }
+  function delGrp() {
+    if (!FORM || FORM.isNew) { closeForms(); return; }
+    var c = loadCfg(), f = findGrp(c, FORM.gid);
+    if (!f) { closeForms(); return; }
+    var n = (f.g.accounts || []).length;
+    if (n) { alert("المجموعة فيها " + n + " حساب — انقلهم أو امسحهم الأول"); return; }
+    if (!confirm("تمسح المجموعة «" + (f.g.name || FORM.gid) + "»؟")) return;
+    c.groups.splice(f.gi, 1);
+    try { localStorage.removeItem(PRE + "gon:" + FORM.gid); } catch (e) {}
+    saveCfg(c);
+    closeForms();
+    afterStruct();
+  }
+  function fillPickSelects() {
+    var html = accOptions(), sels = all("[data-pk] select");
+    for (var i = 0; i < sels.length; i++) {
+      var cur = sels[i].value;
+      sels[i].innerHTML = html;
+      if (cur) sels[i].value = cur;
+    }
+  }
+  function updateHint() {
+    var c = loadCfg(), n = 0, el = document.getElementById("acc_hint");
+    for (var i = 0; i < c.groups.length; i++) n += (c.groups[i].accounts || []).length;
+    if (el) el.textContent = n + " حساب · " + c.groups.length + " مجموعة" +
+      (HINT_TAIL ? " " + HINT_TAIL : "");
+  }
+  function afterStruct() {
+    renderAcc();
+    syncToggles();
+    fillAccountSelects();
+    fillPickSelects();
+    updateHint();
+    recalc();
+  }
+  function actAct(cmd) {
+    if (cmd === "form-close") { closeForms(); return; }
+    if (cmd === "grp-new") { openGrpForm(null); return; }
+    if (!FORM) return;
+    if (cmd === "acc-save") saveAcc();
+    else if (cmd === "acc-del") delAcc();
+    else if (cmd === "acc-new") { var g = FORM.gid; openAccForm(g, null); }
+    else if (cmd === "grp-save") saveGrp();
+    else if (cmd === "grp-del") delGrp();
+  }
 
   function syncToggles() {
     var bs = all("[data-tg]");
@@ -1342,6 +1755,16 @@ function copyReport() {
 
   sec.addEventListener("click", function (e) {
     if (!e.target.closest) return;
+    var act = e.target.closest("[data-act]");
+    if (act) { actAct(act.getAttribute("data-act")); return; }
+    var ea = e.target.closest("[data-ea]");
+    if (ea) {
+      var ar = ea.closest("tr.acc");
+      openAccForm(ar ? ar.getAttribute("data-gid") : "", ea.getAttribute("data-ea"));
+      return;
+    }
+    var eg = e.target.closest("[data-eg]");
+    if (eg) { openGrpForm(eg.getAttribute("data-eg")); return; }
     var t = e.target.closest("[data-tg]");
     if (t) {
       var p = t.getAttribute("data-tg").split(":");
@@ -1371,19 +1794,41 @@ function copyReport() {
     if (ed) startEdit(ed.getAttribute("data-ed"));
   });
 
+  sec.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      if (sec.querySelector("tr.frm")) { e.preventDefault(); closeForms(); }
+      return;
+    }
+    if (e.key !== "Enter") return;
+    var frm = e.target.closest ? e.target.closest("tr.frm") : null;
+    if (!frm) return;
+    e.preventDefault();
+    var b = frm.querySelector('[data-act="' +
+      (frm.getAttribute("data-kind") === "grp" ? "grp-save" : "acc-save") + '"]');
+    if (b) b.click();
+  });
+
+  captureServer();
+  renderAcc();
   syncToggles();
   applyPicks();
+  fillPickSelects();
   recalc();
 })();
 
 /* ===== push the on-site state back into 03_System/accounts.json ===== */
 function exportCfg() {
-  var el = document.getElementById("acc_cfg");
-  if (!el) { alert("لا توجد نسخة من accounts.json داخل الصفحة"); return; }
-  var cfg;
-  try { cfg = JSON.parse(el.textContent); }
-  catch (e) { alert("تعذّرت قراءة accounts.json من الصفحة"); return; }
-  var touched = 0, moved = 0;
+  var cfg = null;
+  if (window.mfCfg) { try { cfg = window.mfCfg(); } catch (e) { cfg = null; } }
+  if (!cfg || !cfg.groups) {
+    var el = document.getElementById("acc_cfg");
+    if (el) { try { cfg = JSON.parse(el.textContent); } catch (e) { cfg = null; } }
+  }
+  if (!cfg || !cfg.groups) {
+    alert("لا توجد نسخة من accounts.json داخل الصفحة");
+    return;
+  }
+  var touched = 0, moved = 0, nAcc = 0;
   (cfg.groups || []).forEach(function (grp) {
     try {
       var gon = localStorage.getItem("mf_acc_gon:" + grp.id);
@@ -1392,6 +1837,7 @@ function exportCfg() {
       }
     } catch (e) {}
     (grp.accounts || []).forEach(function (a) {
+      nAcc++;
       var id = a.id, b = null;
       try {
         var on = localStorage.getItem("mf_acc_on:" + id);
@@ -1407,6 +1853,8 @@ function exportCfg() {
     });
   });
   var txt = JSON.stringify(cfg, null, 2);
+  var head = "حسابات: " + nAcc + " · مجموعات: " + cfg.groups.length +
+             " · رصيد كتبته بيدك: " + touched + " · تبديل «في الإجمالي»: " + moved;
   function download() {
     try {
       var blob = new Blob([txt], { type: "application/json;charset=utf-8" });
@@ -1418,16 +1866,14 @@ function exportCfg() {
       a.click();
       document.body.removeChild(a);
       setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
-      alert("اتحمّل accounts.json — انقله فوق 03_System/accounts.json واضغط rebuild.\n" +
-        "رصيد عدّلته بيدك: " + touched + " · تبديل «في الإجمالي»: " + moved);
+      alert("اتحمّل accounts.json — انقله فوق 03_System/accounts.json واضغط rebuild.\n" + head);
     } catch (e) {
       alert("تعذّر التحميل — النص تحت:\n\n" + txt.slice(0, 1500));
     }
   }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(txt).then(function () {
-      alert("اتنسخ accounts.json — الصقه في 03_System/accounts.json واضغط rebuild.\n" +
-        "رصيد عدّلته بيدك: " + touched + " · تبديل «في الإجمالي»: " + moved);
+      alert("اتنسخ accounts.json — الصقه في 03_System/accounts.json واضغط rebuild.\n" + head);
     }).catch(download);
   } else download();
 }
