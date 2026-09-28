@@ -18,6 +18,10 @@
     --shadow:0 1px 2px rgba(14,42,71,.05), 0 10px 26px -16px rgba(14,42,71,.25);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
+  /* class rules like .cat-op{display:inline-flex} silently beat the UA rule for
+     [hidden], so declare it once here - an element with the hidden attribute
+     must never render whatever its class says.                              */
+  [hidden]{display:none !important;}
   html{-webkit-text-size-adjust:100%;}
   body{
     font-family:"Segoe UI","Noto Sans Arabic","Helvetica Neue",Tahoma,Arial,sans-serif;
@@ -414,7 +418,8 @@
   .pk .pk-m{color:var(--muted); font-variant-numeric:tabular-nums;}
   .pk .pk-r{color:var(--muted); font-size:.78rem;}
   .pk select{
-    font:inherit; font-size:.83rem; padding:6px 9px; margin-inline-start:auto;
+    font:inherit; font-size:.83rem; padding:10px 9px; min-height:44px;
+    margin-inline-start:auto; box-sizing:border-box;
     border:1px solid var(--line); border-radius:9px; background:#fff;
     color:var(--text); max-width:190px;
   }
@@ -437,12 +442,19 @@
   .dl a .sz{margin-inline-start:auto; font-size:.74rem; color:var(--muted); font-weight:500;}
 
   /* ---------- notes / footer ---------- */
+  /* NOTE: must NOT be a flex container - every text run / <b> would become its
+     own flex item, they refuse to wrap, and the block overflows the phone by
+     ~500px. The icon is absolutely positioned instead.                     */
   .note{
-    display:flex; gap:10px; align-items:flex-start; margin-top:14px;
+    display:block; position:relative; margin-top:14px;
     background:var(--blue-bg); border:1px solid #D6E2F5; color:#28405F;
     border-radius:12px; padding:12px 14px; font-size:.86rem;
+    padding-inline:44px 14px;
+    line-height:1.72;
   }
-  .note .ic{color:var(--blue); margin-top:3px;}
+  .note .ic{position:absolute; inset-inline-start:14px; top:14px;
+            color:var(--blue); margin-top:0;}
+  .note > *{max-width:100%;}
   .note.warn{background:var(--amber-bg); border-color:#EFDFAE; color:#6B5310;}
   .note.warn .ic{color:var(--amber);}
   footer{
@@ -506,17 +518,88 @@
     .mk-i{padding:10px 11px;}
     .mk-v{font-size:.92rem;}
     .mk-cols{grid-template-columns:1fr;}
-    #lg_d{width:100%;}
-    #lg_a{width:calc(50% - 5px);}
-    #lg_n{flex:1 1 calc(50% - 5px);}
     .form .btn{width:100%;}
-    table{font-size:.86rem; min-width:360px;}
-    thead th, tbody td{padding:9px 8px;}
-    .share-bar{display:none;}
-    .actions .btn{flex:1 1 100%;}
+
+    /* the Expense / Income / Transfer switch is the widest control here -
+       squeeze it rather than let it push the whole page sideways          */
+    .seg{gap:3px; padding:3px;}
+    .seg-btn{padding:9px 7px; font-size:.82rem; gap:5px;}
+    .seg-btn .ic{width:16px; height:16px;}
+    /* these instruction blocks run to ~400px of text on a phone - tighten
+       them so the actual data stays one short scroll away                */
+    .note{font-size:.82rem; line-height:1.6; padding:11px 12px;
+          padding-inline:40px 12px;}
+    .note .ic{top:12px; inset-inline-start:12px;}
+
+    .cat-head{padding:12px 12px; flex-wrap:wrap;}
+    .cat-h-l b{font-size:.95rem;}
+    .cat-op{padding:7px 9px; font-size:.8rem;}
+    .cat-new{padding:12px; gap:8px;}
+    .cat-foot{padding:10px 12px 16px;}
     .lock-card{padding:28px 20px;}
     .tb{font-size:.66rem; gap:3px; padding:6px 1px;}
     .tb .ic{width:19px; height:19px;}
+
+    /* --- accounts table: 5 real columns will not fit on a phone, so keep
+       everything and make the sideways scroll usable instead ------------ */
+    .tw{scrollbar-width:thin; overscroll-behavior-x:contain;}
+    table{font-size:.86rem; min-width:330px;}
+    thead th, tbody td{padding:9px 6px;}
+    #acc_tbl{font-size:.82rem;}
+    #acc_tbl thead th, #acc_tbl tbody td{padding:9px 5px;}
+    /* value on its own line so the balance column stops being the widest */
+    td.b0 .bv{display:block; width:100%;}
+    .in-ed{width:100%;}
+    /* pin the account name while the table scrolls sideways */
+    #acc_tbl thead th:first-child,
+    #acc_tbl tbody td:first-child{position:sticky; inset-inline-start:0; z-index:1;}
+    #acc_tbl thead th:first-child{background:#fff; z-index:2;}
+    #acc_tbl tbody td:first-child{background:#fff;}
+    #acc_tbl tr.grp td:first-child{background:#F4F7FC;}
+    #acc_tbl tr.tot td:first-child{background:#F3F6FA;}
+    #acc_tbl tr.tot.big td:first-child{background:var(--navy);}
+    #acc_tbl tr.frm td:first-child{background:#F8FAFD;}
+    /* dimmed rows: fade the contents, never the cell itself, or the sticky
+       background turns translucent and the table shows through it         */
+    #acc_tbl tr.off td:first-child{opacity:1;}
+    #acc_tbl tr.off td:first-child > *{opacity:.42;}
+
+    .share-bar{display:none;}
+    .actions .btn{flex:1 1 100%;}
+
+    /* editing a log row: let the form use the whole line instead of being
+       squeezed into ~147px beside the icon and the two round buttons      */
+    .log-row.editing{flex-wrap:wrap; align-items:center;}
+    .log-row.editing .lic{margin-top:0;}
+    .log-row.editing .li-main{order:9; flex:1 1 100%; min-width:100%;}
+  }
+
+  /* ---------- fingers instead of a mouse ---------- */
+  @media (max-width:900px), (pointer:coarse){
+    .ed-t{gap:5px;}
+    .ed-b{padding:8px 11px; font-size:.78rem;}
+    .ed{padding:7px 10px; font-size:.74rem; min-height:34px;
+        margin-inline-start:6px;}
+    .tg{padding:7px 13px; font-size:.8rem; min-height:34px;}
+    .rs{padding:7px 8px; min-height:34px;}
+    .del{padding:11px;}
+    .btn{min-height:46px;}
+    .ed-f input, .ed-f select{padding:9px 9px; min-height:40px;}
+    .cat-op{min-height:42px;}
+  }
+
+  @media (max-width:480px){
+    /* 3 columns of ~110px is unreadable - step down to 2 */
+    .cat-grid{grid-template-columns:repeat(2,1fr);}
+    .cat-box{max-height:90vh;}
+    .seg-btn{padding:9px 5px; font-size:.78rem; gap:4px;}
+    .seg-btn .ic{width:15px; height:15px;}
+    .stat{padding:11px;}
+    .stat .sv{font-size:1.05rem;}
+    .card .v{font-size:1.1rem;}
+    .ed-b{padding:8px 9px;}
+    .tb{font-size:.62rem;}
+    .pk select{max-width:100%;}
   }
 </style>
 </head>
@@ -749,14 +832,11 @@
       <button class="btn btn-danger" onclick="wipeLog()"><svg class="ic" aria-hidden="true"><use href="#ic-x"/></svg> مسح السجل</button>
     </div>
 
-    <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> كل تسجيل لازم يكون مربوط بحساب وفئة — <b>Expense</b> بيخصم
-    من الحساب المختار، <b>Income</b> بيزيد عليه، و<b>Transfer</b> ينقل فلوس من حساب
-    لحساب من غير ما يتغير إجماليك. دوس على <b>Category</b> عشان تختار من الشبكة،
-    وزرار «Add» يضيف فئة جديدة، والسهم اللي جوّا أي فئة بيدخّلك عالم تاني تضيف فيه
-    <b>sub-categories</b> زي ما انت عايز (وزرار <b>Back</b> يرجّعك)، والقلم بيتفعّل
-    عشان تغيّر اسم أي فئة أو تمسحها. البيانات محفوظة داخل متصفح هذا الجهاز — أول ما
-    تيجي للمحاسب اضغط «نسخ التقرير» والصقه هنا بضغطة واحدة، ولتثبيت إعداداتك استخدم
-    «نسخ categories.json» و«نسخ accounts.json» فوق.</div>
+    <div class="note"><svg class="ic" aria-hidden="true"><use href="#ic-info"/></svg> كل تسجيل مربوط بحساب وفئة — <b>Expense</b> بيخصم من
+    الحساب المختار، <b>Income</b> بيزيد عليه، و<b>Transfer</b> ينقل بين حسابين من غير
+    ما يتغير إجماليك. دوس <b>Category</b> عشان تختار، وزرار «Add» يضيف فئة، والسهم
+    جوّا أي فئة يودّيك تضيف له <b>sub-categories</b> زي ما انت عايز، والقلم يغيّر
+    الأسماء ويمسح. «نسخ التقرير» يبعت الشهر للمحاسب بضغطة واحدة.</div>
     <script type="application/json" id="cat_cfg">{"income": [{"id": "salary", "name": "Salary", "icon": "banknote", "subs": [{"id": "main_job", "name": "Main job", "icon": "banknote"}, {"id": "side_job", "name": "Side job", "icon": "send"}]}, {"id": "overtime", "name": "Overtime", "icon": "clock", "subs": []}, {"id": "bonus", "name": "Bonus", "icon": "target", "subs": []}, {"id": "transportation", "name": "Transportation", "icon": "fuel", "subs": []}, {"id": "freelance", "name": "Freelance", "icon": "send", "subs": []}, {"id": "profit", "name": "Profit", "icon": "trending-up", "subs": []}, {"id": "other", "name": "Other", "icon": "circle-dot", "subs": []}], "expense": [{"id": "food", "name": "Food", "icon": "utensils", "subs": [{"id": "restaurants", "name": "Restaurants", "icon": "utensils"}, {"id": "coffee", "name": "Coffee", "icon": "coffee"}, {"id": "delivery", "name": "Delivery", "icon": "send"}]}, {"id": "social", "name": "Social Life", "icon": "users", "subs": []}, {"id": "bike", "name": "Bike", "icon": "bike", "subs": [{"id": "repair", "name": "Repair", "icon": "circle-alert"}, {"id": "fuel", "name": "Fuel", "icon": "fuel"}, {"id": "gear", "name": "Gear", "icon": "shirt"}]}, {"id": "transport", "name": "Transport", "icon": "car", "subs": []}, {"id": "personal", "name": "Personal", "icon": "shirt", "subs": []}, {"id": "home", "name": "Home", "icon": "house", "subs": []}, {"id": "health", "name": "Health", "icon": "heart-pulse", "subs": []}, {"id": "bills", "name": "Bills", "icon": "file-text", "subs": [{"id": "electricity", "name": "Electricity", "icon": "circle-dot"}, {"id": "internet", "name": "Internet", "icon": "smartphone"}, {"id": "rent", "name": "Rent", "icon": "house"}]}, {"id": "debts", "name": "Debts", "icon": "trending-down", "subs": []}, {"id": "gift", "name": "Gift", "icon": "gift", "subs": []}, {"id": "groceries", "name": "Groceries", "icon": "shopping-basket", "subs": []}, {"id": "shopping", "name": "Shopping", "icon": "shopping-cart", "subs": []}, {"id": "subscriptions", "name": "Subscriptions", "icon": "refresh-cw", "subs": []}, {"id": "other", "name": "Other", "icon": "circle-dot", "subs": []}]}</script>
   </section>
 
