@@ -1961,7 +1961,7 @@ function caLine(x,W,H,A){
 }
 function caSize(id,fh){
   var c=document.getElementById(id);if(!c)return null;
-  var d=window.devicePixelRatio||1,w=c.clientWidth,h=fh||w;
+  var d=window.devicePixelRatio||1,w=Math.max(c.clientWidth,240),h=fh||w;
   c.width=Math.round(w)*d;c.height=Math.round(h)*d;
   var x=c.getContext("2d");x.setTransform(d,0,0,d,0,0);
   return{x:x,w:w,h:h};
