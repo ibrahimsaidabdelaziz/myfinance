@@ -1979,7 +1979,7 @@ function caRender(){
   var lsc=document.getElementById("ca_list"),lse=document.getElementById("ca_list_empty");
   if(!list.length){if(lsc)lsc.hidden=true;if(lse)lse.hidden=false;}else{if(lse)lse.hidden=true;if(lsc)lsc.hidden=false;lsc.innerHTML=caDetailHTML(list);}
 }
-(function initCatAnalysis(){caRender();})();
+(function initCatAnalysis(){ requestAnimationFrame(caRender); })();
 
 /* ===== category sheet: pick / add / delete / reset ===== */
 (function initCats() {
