@@ -1868,6 +1868,9 @@ function copyReport() {
 })();
 
 /* ===== category analysis: "Where did the money go" ===== */
+function svg(n){return'<svg class="ic" aria-hidden="true"><use href="#ic-'+escAttr(n)+'"/></svg>';}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function money2(x){try{return Number(x).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});}catch(e){return "";}}
 var CA_PAL=["#DC2626","#F59E0B","#10B981","#3B82F6","#8B5CF6","#EC4899","#06B6D4","#84CC16","#F97316","#6366F1"];
 function caAnalysis(){
   var arr=loadLog(),now=new Date();
